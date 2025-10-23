@@ -1,1 +1,2 @@
-# Sistema de Riego Inteligente (Lógica Difusa)\n\nProyecto académico completo en Python + Streamlit para calcular decisiones de riego con un sistema experto basado en Lógica Difusa (Mamdani).\n\n## Ejecución rápida\n\n```bash\npip install -r requirements.txt\nstreamlit run app.py\n```\n\n## Estructura\nVer directorios en `riego-inteligente/` según especificación.\n\n## Créditos\nEquipo de 5 personas.\n
+Sistema de Riego Inteligente (Lógica Difusa)
+Proyecto académico completo en Python + Streamlit para calcular decisiones de riego con un sistema experto basado en Lógica Difusa (Mamdani).Créditos\nEquipo de 5 personas.
