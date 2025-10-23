@@ -1,0 +1,66 @@
+[
+  {
+    "nombre": "Tomate",
+    "humedad_suelo_opt": [50, 80],
+    "temperatura_opt": [18, 30],
+    "factor_ajuste": 1.0,
+    "tolerancia_extremos": "media",
+    "consejos": "Evitar encharcamientos; riego frecuente en calor alto."
+  },
+  {
+    "nombre": "Lechuga",
+    "humedad_suelo_opt": [60, 85],
+    "temperatura_opt": [10, 24],
+    "factor_ajuste": 0.9,
+    "tolerancia_extremos": "baja",
+    "consejos": "Prefiere suelo siempre húmedo; sensible al calor."
+  },
+  {
+    "nombre": "Zanahoria",
+    "humedad_suelo_opt": [45, 75],
+    "temperatura_opt": [10, 25],
+    "factor_ajuste": 0.95,
+    "tolerancia_extremos": "media",
+    "consejos": "Riegos regulares; evitar suelos muy compactos."
+  },
+  {
+    "nombre": "Cactus",
+    "humedad_suelo_opt": [10, 30],
+    "temperatura_opt": [20, 40],
+    "factor_ajuste": 0.4,
+    "tolerancia_extremos": "alta",
+    "consejos": "Riego muy espaciado; excelente drenaje."
+  },
+  {
+    "nombre": "Rosa",
+    "humedad_suelo_opt": [40, 70],
+    "temperatura_opt": [15, 28],
+    "factor_ajuste": 1.0,
+    "tolerancia_extremos": "media",
+    "consejos": "Riegos profundos; evitar mojar hojas en exceso."
+  },
+  {
+    "nombre": "Césped",
+    "humedad_suelo_opt": [50, 80],
+    "temperatura_opt": [15, 28],
+    "factor_ajuste": 1.1,
+    "tolerancia_extremos": "media",
+    "consejos": "Frecuencia moderada; más en verano."
+  },
+  {
+    "nombre": "Maíz",
+    "humedad_suelo_opt": [40, 70],
+    "temperatura_opt": [18, 32],
+    "factor_ajuste": 1.05,
+    "tolerancia_extremos": "media",
+    "consejos": "Aumentar riego en floración y llenado de grano."
+  },
+  {
+    "nombre": "Fresa",
+    "humedad_suelo_opt": [60, 85],
+    "temperatura_opt": [15, 26],
+    "factor_ajuste": 1.0,
+    "tolerancia_extremos": "baja",
+    "consejos": "Evitar encharcar; riego frecuente y ligero."
+  }
+]

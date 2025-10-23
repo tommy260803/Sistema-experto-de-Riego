@@ -1,0 +1,5 @@
+ts,temperatura,humedad_suelo,prob_lluvia,humedad_ambiental,viento,planta,tiempo_min,frecuencia
+1761253013,19.4,17.25,14.76,16.75,8.29,Lechuga,44.53,2.88
+1761253022,19.4,17.25,14.76,16.75,8.29,Lechuga,44.53,2.88
+1761253025,19.4,17.25,14.76,16.75,8.29,Zanahoria,47.01,2.93
+1761253093,19.4,17.25,14.76,16.75,8.29,Zanahoria,47.01,2.93

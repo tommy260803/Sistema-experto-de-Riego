@@ -1,0 +1,72 @@
+[
+  {
+    "temperatura": 19.4,
+    "humedad_suelo": 17.25,
+    "prob_lluvia": 14.76,
+    "humedad_ambiente": 16.75,
+    "velocidad_viento": 8.29,
+    "planta": "Lechuga",
+    "tiempo_min": 44.09,
+    "frecuencia": 2.88
+  },
+  {
+    "temperatura": 19.4,
+    "humedad_suelo": 17.25,
+    "prob_lluvia": 14.76,
+    "humedad_ambiente": 16.75,
+    "velocidad_viento": 8.29,
+    "planta": "Lechuga",
+    "tiempo_min": 44.09,
+    "frecuencia": 2.88
+  },
+  {
+    "temperatura": 19.4,
+    "humedad_suelo": 17.25,
+    "prob_lluvia": 14.76,
+    "humedad_ambiente": 16.75,
+    "velocidad_viento": 8.29,
+    "planta": "Zanahoria",
+    "tiempo_min": 49.12,
+    "frecuencia": 2.93
+  },
+  {
+    "temperatura": 19.4,
+    "humedad_suelo": 17.25,
+    "prob_lluvia": 14.76,
+    "humedad_ambiente": 16.75,
+    "velocidad_viento": 8.29,
+    "planta": "Zanahoria",
+    "tiempo_min": 49.12,
+    "frecuencia": 2.93
+  },
+  {
+    "temperatura": 19.4,
+    "humedad_suelo": 17.25,
+    "prob_lluvia": 14.76,
+    "humedad_ambiente": 16.75,
+    "velocidad_viento": 8.29,
+    "planta": "Zanahoria",
+    "tiempo_min": 49.12,
+    "frecuencia": 2.93
+  },
+  {
+    "temperatura": 19.4,
+    "humedad_suelo": 17.25,
+    "prob_lluvia": 14.76,
+    "humedad_ambiente": 16.75,
+    "velocidad_viento": 8.29,
+    "planta": "Zanahoria",
+    "tiempo_min": 49.12,
+    "frecuencia": 2.93
+  },
+  {
+    "temperatura": 19.4,
+    "humedad_suelo": 17.25,
+    "prob_lluvia": 14.76,
+    "humedad_ambiente": 16.75,
+    "velocidad_viento": 8.29,
+    "planta": "Zanahoria",
+    "tiempo_min": 49.12,
+    "frecuencia": 2.93
+  }
+]

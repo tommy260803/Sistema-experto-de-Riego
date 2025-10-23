@@ -1,0 +1,12 @@
+[
+  {"nombre":"Día caluroso","temperatura":38,"humedad_suelo":20,"prob_lluvia":5,"humedad_ambiental":25,"viento":10,"planta":"Tomate"},
+  {"nombre":"Noche fría","temperatura":8,"humedad_suelo":55,"prob_lluvia":10,"humedad_ambiental":80,"viento":5,"planta":"Lechuga"},
+  {"nombre":"Tormenta próxima","temperatura":22,"humedad_suelo":45,"prob_lluvia":85,"humedad_ambiental":90,"viento":25,"planta":"Césped"},
+  {"nombre":"Sequía","temperatura":34,"humedad_suelo":12,"prob_lluvia":0,"humedad_ambiental":20,"viento":18,"planta":"Maíz"},
+  {"nombre":"Viento fuerte","temperatura":28,"humedad_suelo":30,"prob_lluvia":15,"humedad_ambiental":35,"viento":40,"planta":"Rosa"},
+  {"nombre":"Humedad alta","temperatura":24,"humedad_suelo":70,"prob_lluvia":40,"humedad_ambiental":85,"viento":8,"planta":"Fresa"},
+  {"nombre":"Lluvia media","temperatura":20,"humedad_suelo":50,"prob_lluvia":50,"humedad_ambiental":60,"viento":12,"planta":"Zanahoria"},
+  {"nombre":"Mediodía templado","temperatura":26,"humedad_suelo":40,"prob_lluvia":20,"humedad_ambiental":45,"viento":10,"planta":"Tomate"},
+  {"nombre":"Amanecer fresco","temperatura":12,"humedad_suelo":35,"prob_lluvia":15,"humedad_ambiental":70,"viento":6,"planta":"Lechuga"},
+  {"nombre":"Desierto seco","temperatura":40,"humedad_suelo":8,"prob_lluvia":0,"humedad_ambiental":10,"viento":15,"planta":"Cactus"}
+]

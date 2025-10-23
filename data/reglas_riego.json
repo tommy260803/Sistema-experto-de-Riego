@@ -1,0 +1,10 @@
+{
+  "descripcion": "Conjunto de reglas difusas usadas por el sistema (resumen)",
+  "reglas": [
+    "SI humedad_suelo=seca AND prob_lluvia=baja ENTONCES tiempo=largo Y frecuencia=alta",
+    "SI humedad_suelo=humeda ENTONCES tiempo=corto Y frecuencia=baja",
+    "SI temperatura=alta AND humedad_suelo=seca ENTONCES tiempo=largo",
+    "SI prob_lluvia=alta ENTONCES tiempo=nulo",
+    "SI viento=alto AND temperatura=alta ENTONCES frecuencia=alta"
+  ]
+}

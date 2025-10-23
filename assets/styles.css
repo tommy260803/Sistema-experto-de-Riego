@@ -1,0 +1,1 @@
+:root{--primary:#0ea5e9;--secondary:#10b981;--warning:#f59e0b;--danger:#ef4444;}\n.block-container{padding-top:1rem;}\n.metric-green{color:var(--secondary);}\n.metric-yellow{color:var(--warning);}\n.metric-red{color:var(--danger);}\n
