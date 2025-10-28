@@ -1,10 +1,10 @@
 import os
 import streamlit as st
-from components.dashboard import render_dashboard
-from components.simulator import render_simulator
-from components.historical import render_historical
-from components.reports import render_reports
-from src.utils import ensure_data_files
+from components.tablero_control import render_dashboard
+from components.simulador import render_simulator
+from components.historico import render_historical
+from components.informes import render_reports
+from nucleo.utilidades import ensure_data_files
 
 ensure_data_files()
 
@@ -34,7 +34,7 @@ tab1, tab2, tab3, tab4 = st.tabs([
 with tab1:
     render_dashboard()
 with tab2:
-    from src.visualization import render_visualizations_page
+    from nucleo.visualizacion import render_visualizations_page
     render_visualizations_page()
 with tab3:
     render_historical()

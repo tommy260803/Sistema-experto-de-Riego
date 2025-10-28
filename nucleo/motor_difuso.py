@@ -16,14 +16,14 @@ FREQ_UNIVERSE = np.linspace(0, 4, 401)
 
 
 @dataclass
-class FuzzyResult:
+class ResultadoDifuso:
     tiempo_min: float
     frecuencia: float
     activaciones: Dict[str, float]
     explicacion: str
 
 
-class FuzzyIrrigationSystem:
+class SistemaRiegoDifuso:
     """Sistema de Riego Inteligente basado en Lógica Difusa (Mamdani)."""
 
     def __init__(self) -> None:
@@ -143,26 +143,26 @@ class FuzzyIrrigationSystem:
         self._ctrl = ctrl.ControlSystem(rules)
         self._sim = ctrl.ControlSystemSimulation(self._ctrl, flush_after_run=100)
 
-    def calculate_irrigation(
+    def _calcular_riego_interno(
         self,
-        temperature: float,
-        soil_humidity: float,
-        rain_probability: float,
-        air_humidity: float,
-        wind_speed: float,
+        temperatura: float,
+        humedad_suelo: float,
+        probabilidad_lluvia: float,
+        humedad_aire: float,
+        velocidad_viento: float,
         ajuste_planta: float = 1.0,
     ) -> Tuple[float, float, Dict[str, float]]:
-        """Calcula tiempo y frecuencia de riego.
+        """Calcula tiempo y frecuencia de riego (método interno).
 
         Returns:
             tuple: (tiempo_min, frecuencia, activaciones_por_regla)
         """
         # Set inputs
-        self._sim.input["temperatura"] = float(temperature)
-        self._sim.input["humedad_suelo"] = float(soil_humidity)
-        self._sim.input["lluvia"] = float(rain_probability)
-        self._sim.input["humedad_aire"] = float(air_humidity)
-        self._sim.input["viento"] = float(wind_speed)
+        self._sim.input["temperatura"] = float(temperatura)
+        self._sim.input["humedad_suelo"] = float(humedad_suelo)
+        self._sim.input["lluvia"] = float(probabilidad_lluvia)
+        self._sim.input["humedad_aire"] = float(humedad_aire)
+        self._sim.input["viento"] = float(velocidad_viento)
 
         self._sim.compute()
 
@@ -172,8 +172,8 @@ class FuzzyIrrigationSystem:
         tiempo = max(0.0, min(60.0, tiempo))
         frecuencia = max(0.0, min(4.0, frecuencia))
 
-        activ = self.get_rule_activations(
-            temperature, soil_humidity, rain_probability, air_humidity, wind_speed
+        activ = self.obtener_activaciones_reglas(
+            temperatura, humedad_suelo, probabilidad_lluvia, humedad_aire, velocidad_viento
         )
         return tiempo, frecuencia, activ
 
@@ -191,17 +191,17 @@ class FuzzyIrrigationSystem:
         viento = float(inputs.get("velocidad_viento", inputs.get("viento", 0)))
         factor = float(inputs.get("planta_factor", inputs.get("ajuste_planta", 1.0)))
 
-        t, f, act = self.calculate_irrigation(
-            temperature=temp,
-            soil_humidity=hsuelo,
-            rain_probability=plluvia,
-            air_humidity=hamb,
-            wind_speed=viento,
+        t, f, act = self._calcular_riego_interno(
+            temperatura=temp,
+            humedad_suelo=hsuelo,
+            probabilidad_lluvia=plluvia,
+            humedad_aire=hamb,
+            velocidad_viento=viento,
             ajuste_planta=factor,
         )
         return {"tiempo": t, "frecuencia": f, "reglas_activadas": act}
 
-    def get_rule_activations(
+    def obtener_activaciones_reglas(
         self,
         temperature: float,
         soil_humidity: float,
@@ -284,3 +284,25 @@ class FuzzyIrrigationSystem:
             + ", ".join([f"{k} ({v:.2f})" for k, v in top]),
         ]
         return " ".join(partes)
+
+    # Métodos públicos en inglés para compatibilidad interna
+    def get_rule_activations(
+        self,
+        temperature: float,
+        soil_humidity: float,
+        rain_probability: float,
+        air_humidity: float,
+        wind_speed: float,
+    ) -> Dict[str, float]:
+        return self.obtener_activaciones_reglas(temperature, soil_humidity, rain_probability, air_humidity, wind_speed)
+
+    def calculate_irrigation(
+        self,
+        temperature: float,
+        soil_humidity: float,
+        rain_probability: float,
+        air_humidity: float,
+        wind_speed: float,
+        ajuste_planta: float = 1.0,
+    ) -> Tuple[float, float, Dict[str, float]]:
+        return self._calcular_riego_interno(temperature, soil_humidity, rain_probability, air_humidity, wind_speed, ajuste_planta)

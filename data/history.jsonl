@@ -5,3 +5,5 @@
 {"ts": 1761253096, "temperatura": 19.4, "humedad_suelo": 17.25, "prob_lluvia": 14.76, "humedad_ambiental": 16.75, "viento": 8.29, "planta": "Zanahoria", "tiempo_min": 47.01, "frecuencia": 2.93}
 {"ts": 1761253155, "temperatura": 19.4, "humedad_suelo": 17.25, "prob_lluvia": 14.76, "humedad_ambiental": 16.75, "viento": 8.29, "planta": "Zanahoria", "tiempo_min": 47.01, "frecuencia": 2.93}
 {"ts": 1761253197, "temperatura": 19.4, "humedad_suelo": 17.25, "prob_lluvia": 14.76, "humedad_ambiental": 16.75, "viento": 8.29, "planta": "Zanahoria", "tiempo_min": 47.01, "frecuencia": 2.93}
+{"ts": 1761678817, "temperatura": 25.0, "humedad_suelo": 30.0, "prob_lluvia": 10.0, "humedad_ambiental": 40.0, "viento": 8.0, "planta": "Tomate", "tiempo_min": 27.5, "frecuencia": 2.1}
+{"ts": 1761680954, "temperatura": 25.0, "humedad_suelo": 30.0, "prob_lluvia": 10.0, "humedad_ambiental": 40.0, "viento": 8.0, "planta": "Tomate", "tiempo_min": 27.5, "frecuencia": 2.1}

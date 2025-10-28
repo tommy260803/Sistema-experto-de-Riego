@@ -4,8 +4,8 @@ import io
 from typing import Dict, List
 import streamlit as st
 from fpdf import FPDF
-from src.knowledge_base import PLANT_KB
-from src.utils import export_history_csv
+from nucleo.base_conocimientos import PLANT_KB
+from nucleo.utilidades import export_history_csv
 
 
 class _PDF(FPDF):

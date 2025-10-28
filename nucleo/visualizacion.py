@@ -5,20 +5,20 @@ import plotly.graph_objects as go
 import matplotlib.pyplot as plt
 import seaborn as sns
 import streamlit as st
-from .fuzzy_engine import (
+from .motor_difuso import (
     TEMP_UNIVERSE,
     SOIL_UNIVERSE,
     RAIN_UNIVERSE,
     AIRH_UNIVERSE,
     WIND_UNIVERSE,
-    FREQ_UNIVERSE,
     TIME_UNIVERSE,
-    FuzzyIrrigationSystem,
+    FREQ_UNIVERSE,
+    SistemaRiegoDifuso,
 )
-from .knowledge_base import PLANT_KB
+from .base_conocimientos import PLANT_KB
 
 
-def plot_membership_functions(system: FuzzyIrrigationSystem) -> None:
+def plot_membership_functions(system: SistemaRiegoDifuso) -> None:
     """Graficar todas las funciones de membresía (5 entradas + 2 salidas)."""
     st.subheader("Funciones de Membresía")
     grids = [
@@ -72,7 +72,7 @@ def radar_inputs(vals: Dict[str, float]) -> None:
 
 def render_visualizations_page() -> None:
     st.title("📊 Visualizaciones")
-    sys = FuzzyIrrigationSystem()
+    sys = SistemaRiegoDifuso()
 
     option = st.selectbox(
         "Selecciona visualización",
@@ -96,14 +96,14 @@ def render_visualizations_page() -> None:
         plot_comparacion_plantas()
     elif option == "Histórico":
         import pandas as pd
-        from .utils import load_history
+        from .utilidades import load_history
         df = load_history()
         plot_historico(df)
 
 
 def plot_surface_3d(var1: str, var2: str, output: str) -> None:
     """Superficie 3D aproximada evaluando el sistema en una grilla."""
-    sys = FuzzyIrrigationSystem()
+    sys = SistemaRiegoDifuso()
     grid_x = np.linspace(0, 50, 30) if var1 == "temperatura" else np.linspace(0, 100, 30)
     grid_y = np.linspace(0, 100, 30)
     Z = np.zeros((len(grid_x), len(grid_y)))

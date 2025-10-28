@@ -68,5 +68,25 @@
     "planta": "Zanahoria",
     "tiempo_min": 49.12,
     "frecuencia": 2.93
+  },
+  {
+    "temperatura": 25.0,
+    "humedad_suelo": 30.0,
+    "prob_lluvia": 10.0,
+    "humedad_ambiente": 40.0,
+    "velocidad_viento": 8.0,
+    "planta": "Tomate",
+    "tiempo_min": 30.25,
+    "frecuencia": 2.1
+  },
+  {
+    "temperatura": 25.0,
+    "humedad_suelo": 30.0,
+    "prob_lluvia": 10.0,
+    "humedad_ambiente": 40.0,
+    "velocidad_viento": 8.0,
+    "planta": "Tomate",
+    "tiempo_min": 30.25,
+    "frecuencia": 2.1
   }
 ]

@@ -4,11 +4,11 @@ import random
 from typing import Dict, List
 import streamlit as st
 import pandas as pd
-from src.fuzzy_engine import FuzzyIrrigationSystem
-from src.knowledge_base import PLANT_KB, PLANTS
+from nucleo.motor_difuso import SistemaRiegoDifuso
+from nucleo.base_conocimientos import PLANT_KB, PLANTS
 
 SCENARIOS_PATH = "data/escenarios_prueba.json"
-_engine = FuzzyIrrigationSystem()
+_engine = SistemaRiegoDifuso()
 
 # Escenarios requeridos por la especificación
 ESCENARIOS = {

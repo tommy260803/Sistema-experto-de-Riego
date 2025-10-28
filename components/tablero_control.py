@@ -1,11 +1,11 @@
 from __future__ import annotations
 import streamlit as st
 import plotly.graph_objects as go
-from src.fuzzy_engine import FuzzyIrrigationSystem
-from src.knowledge_base import PLANT_KB, PLANTS, get_recomendacion
-from src.utils import validate_inputs, save_history, timestamp, estimate_water_saving
+from nucleo.motor_difuso import SistemaRiegoDifuso
+from nucleo.base_conocimientos import PLANT_KB, PLANTS, get_recomendacion
+from nucleo.utilidades import validate_inputs, save_history, timestamp, estimate_water_saving
 
-_engine = FuzzyIrrigationSystem()
+_engine = SistemaRiegoDifuso()
 
 
 def _gauge(title: str, value: float, minv: float, maxv: float, suffix: str = ""):

@@ -2,8 +2,8 @@ from __future__ import annotations
 import io
 import streamlit as st
 import pandas as pd
-from src.utils import load_history, export_history_csv, clear_history
-from src.visualization import plot_historico
+from nucleo.utilidades import load_history, export_history_csv, clear_history
+from nucleo.visualizacion import plot_historico
 
 
 def _stats(df: pd.DataFrame) -> None:
