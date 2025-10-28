@@ -72,7 +72,11 @@ def radar_inputs(vals: Dict[str, float]) -> None:
 
 def render_visualizations_page() -> None:
     st.title("📊 Visualizaciones")
-    sys = SistemaRiegoDifuso()
+    try:
+        sys = SistemaRiegoDifuso()
+    except Exception as e:
+        st.error(f"Error inicializando sistema de riego: {e}")
+        return
 
     option = st.selectbox(
         "Selecciona visualización",
@@ -85,28 +89,45 @@ def render_visualizations_page() -> None:
     )
 
     if option == "Funciones de Membresía":
-        plot_membership_functions(sys)
-        st.subheader("Activación de reglas (ejemplo)")
-        act = sys.get_rule_activations(30, 25, 10, 30, 10)
-        plot_reglas_activadas(act)
+        try:
+            plot_membership_functions(sys)
+            st.subheader("Activación de reglas (ejemplo)")
+            act = sys.get_rule_activations(30, 25, 10, 30, 10)
+            plot_reglas_activadas(act)
+        except Exception as e:
+            st.error(f"Error generando funciones de membresía: {e}")
     elif option == "Superficie 3D":
-        st.write("Prueba 3D: temp vs humedad_suelo -> tiempo")
-        plot_surface_3d("temperatura", "humedad_suelo", "tiempo")
+        try:
+            # Test calculation
+            test_t, test_f, _ = sys.calculate_irrigation(temperature=25.0, soil_humidity=40.0, rain_probability=20.0, air_humidity=50.0, wind_speed=10.0)
+            st.write(f"Prueba de cálculo: tiempo={test_t:.2f}, frecuencia={test_f:.2f}")
+            if test_t == 0.0 and test_f == 0.0:
+                st.warning("El cálculo devuelve 0. Posibles issues en el motor fuzzy.")
+            st.write("Superficie 3D: temperatura vs humedad_suelo -> tiempo")
+            plot_surface_3d("temperatura", "humedad_suelo", "tiempo")
+        except Exception as e:
+            st.error(f"Error generando superficie 3D: {e}")
     elif option == "Comparación de Plantas":
-        plot_comparacion_plantas()
+        try:
+            plot_comparacion_plantas()
+        except Exception as e:
+            st.error(f"Error generando comparación de plantas: {e}")
     elif option == "Histórico":
-        import pandas as pd
-        from .utilidades import load_history
-        df = load_history()
-        plot_historico(df)
+        try:
+            import pandas as pd
+            from .utilidades import load_history
+            df = load_history()
+            plot_historico(df)
+        except Exception as e:
+            st.error(f"Error cargando histórico: {e}")
 
 
 def plot_surface_3d(var1: str, var2: str, output: str) -> None:
     """Superficie 3D aproximada evaluando el sistema en una grilla."""
     sys = SistemaRiegoDifuso()
-    grid_x = np.linspace(0, 50, 30) if var1 == "temperatura" else np.linspace(0, 100, 30)
-    grid_y = np.linspace(0, 100, 30)
-    Z = np.zeros((len(grid_x), len(grid_y)))
+    grid_x = np.linspace(0, 50, 20) if var1 == "temperatura" else np.linspace(0, 100, 20)
+    grid_y = np.linspace(0, 100, 20)
+    Z = np.zeros((20, 20))
     for i, x in enumerate(grid_x):
         for j, y in enumerate(grid_y):
             t, f, _ = sys.calculate_irrigation(
@@ -117,8 +138,8 @@ def plot_surface_3d(var1: str, var2: str, output: str) -> None:
                 wind_speed=10,
             )
             Z[i, j] = t if output == "tiempo" else f
-    fig = go.Figure(data=[go.Surface(z=Z, x=grid_x, y=grid_y)])
-    fig.update_layout(scene=dict(xaxis_title=var1, yaxis_title=var2, zaxis_title=output))
+    fig = go.Figure(data=go.Contour(z=Z, x=grid_x, y=grid_y, colorscale='Viridis'))
+    fig.update_layout(title=f"Contorno de {output} vs {var1} y {var2}", xaxis_title=var1, yaxis_title=var2)
     st.plotly_chart(fig, use_container_width=True)
 
 
