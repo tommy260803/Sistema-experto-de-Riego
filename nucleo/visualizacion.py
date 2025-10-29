@@ -125,9 +125,9 @@ def render_visualizations_page() -> None:
 def plot_surface_3d(var1: str, var2: str, output: str) -> None:
     """Superficie 3D aproximada evaluando el sistema en una grilla."""
     sys = SistemaRiegoDifuso()
-    grid_x = np.linspace(0, 50, 20) if var1 == "temperatura" else np.linspace(0, 100, 20)
-    grid_y = np.linspace(0, 100, 20)
-    Z = np.zeros((20, 20))
+    grid_x = np.linspace(0, 50, 30) if var1 == "temperatura" else np.linspace(0, 100, 30)
+    grid_y = np.linspace(0, 100, 30)
+    Z = np.zeros((len(grid_x), len(grid_y)))
     for i, x in enumerate(grid_x):
         for j, y in enumerate(grid_y):
             t, f, _ = sys.calculate_irrigation(
@@ -138,8 +138,8 @@ def plot_surface_3d(var1: str, var2: str, output: str) -> None:
                 wind_speed=10,
             )
             Z[i, j] = t if output == "tiempo" else f
-    fig = go.Figure(data=go.Contour(z=Z, x=grid_x, y=grid_y, colorscale='Viridis'))
-    fig.update_layout(title=f"Contorno de {output} vs {var1} y {var2}", xaxis_title=var1, yaxis_title=var2)
+    fig = go.Figure(data=[go.Surface(z=Z, x=grid_x, y=grid_y)])
+    fig.update_layout(scene=dict(xaxis_title=var1, yaxis_title=var2, zaxis_title=output))
     st.plotly_chart(fig, use_container_width=True)
 
 
