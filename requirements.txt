@@ -6,4 +6,4 @@ matplotlib==3.7.1
 seaborn==0.12.2
 fpdf==1.7.2
 numpy==1.26.4
-scipy==1.11.3
+scipy==1.11.4
