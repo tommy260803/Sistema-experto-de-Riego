@@ -275,13 +275,22 @@ class ThemeToggle:
                 flex-direction: column !important;
             }}
             .stTabs [data-baseweb="tab-list"] {{
-                display: flex !important;
-                flex-wrap: wrap !important;
-                justify-content: center !important;
+                display: grid !important;
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 6px !important;
+                overflow: hidden !important;
             }}
             .stTabs [data-baseweb="tab"] {{
-                max-width: 120px !important;
-                margin: 0 2px !important;
+                font-size: 11px !important;
+                padding: 8px 4px !important;
+                text-align: center !important;
+                white-space: normal !important;
+                line-height: 1.2 !important;
+                min-height: 48px !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                border-radius: 6px !important;
             }}
             /* Asegurar que las métricas en columnas se apilen */
             [data-baseweb="card"] {{
@@ -335,8 +344,8 @@ class ThemeToggle:
             }}
             .stTabs [data-baseweb="tab"] {{
                 padding: 8px 6px !important;
-                font-size: 11px !important;
-                max-width: 70px !important;
+                font-size: 12px !important;
+                max-width: 85px !important;
                 margin: 0 2px !important;
             }}
             /* Reducir espacio en métricas para móviles */

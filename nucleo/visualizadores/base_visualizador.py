@@ -312,12 +312,12 @@ def renderizar_pagina_visualizaciones() -> None:
 
     # Menú de navegación con tabs
     tab_dashboard, tab_membership, tab_surfaces, tab_rules, tab_plants, tab_sensitivity = st.tabs([
-        "🏠 Dashboard Principal",
-        "🎛️ Funciones de Membresía",
-        "🌐 Superficies 3D",
-        "🔍 Análisis de Reglas",
-        "🌱 Comparación de Plantas",
-        "📈 Análisis de Sensibilidad"
+        "🏠 Dashboard",
+        "🎛️ Membresía",
+        "🌐 3D",
+        "🔍 Reglas",
+        "🌱 Plantas",
+        "📈 Sensibilidad"
     ])
 
     # Calcular outputs
