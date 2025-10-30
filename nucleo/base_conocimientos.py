@@ -3,65 +3,81 @@ from typing import Dict, Any, List
 import json
 import os
 
-PLANT_KB: Dict[str, Dict[str, Any]] = {
-    "Tomate": {
-        "humedad_suelo_opt": [50, 80],
-        "temperatura_opt": [18, 30],
-        "factor_ajuste": 1.0,
-        "tolerancia_extremos": "media",
-        "consejos": "Evitar encharcamientos; riego frecuente en calor alto.",
-    },
-    "Lechuga": {
-        "humedad_suelo_opt": [60, 85],
-        "temperatura_opt": [10, 24],
-        "factor_ajuste": 0.9,
-        "tolerancia_extremos": "baja",
-        "consejos": "Prefiere suelo siempre húmedo; sensible al calor.",
-    },
-    "Zanahoria": {
-        "humedad_suelo_opt": [45, 75],
-        "temperatura_opt": [10, 25],
-        "factor_ajuste": 0.95,
-        "tolerancia_extremos": "media",
-        "consejos": "Riegos regulares; evitar suelos muy compactos.",
-    },
-    "Cactus": {
-        "humedad_suelo_opt": [10, 30],
-        "temperatura_opt": [20, 40],
-        "factor_ajuste": 0.4,
-        "tolerancia_extremos": "alta",
-        "consejos": "Riego muy espaciado; excelente drenaje.",
-    },
-    "Rosa": {
-        "humedad_suelo_opt": [40, 70],
-        "temperatura_opt": [15, 28],
-        "factor_ajuste": 1.0,
-        "tolerancia_extremos": "media",
-        "consejos": "Riegos profundos; evitar mojar hojas en exceso.",
-    },
-    "Césped": {
-        "humedad_suelo_opt": [50, 80],
-        "temperatura_opt": [15, 28],
-        "factor_ajuste": 1.1,
-        "tolerancia_extremos": "media",
-        "consejos": "Frecuencia moderada; más en verano.",
-    },
-    "Maíz": {
-        "humedad_suelo_opt": [40, 70],
-        "temperatura_opt": [18, 32],
-        "factor_ajuste": 1.05,
-        "tolerancia_extremos": "media",
-        "consejos": "Aumentar riego en floración y llenado de grano.",
-    },
-    "Fresa": {
-        "humedad_suelo_opt": [60, 85],
-        "temperatura_opt": [15, 26],
-        "factor_ajuste": 1.0,
-        "tolerancia_extremos": "baja",
-        "consejos": "Evitar encharcar; riego frecuente y ligero.",
-    },
-}
 
+class KnowledgeBase:
+    """
+    Clase encargada de manejar la base de conocimiento de plantas y reglas de riego.
+    """
+
+    def __init__(self, data_path="data/plantas.json"):
+        self.data_path = os.path.abspath(data_path)
+        self.plantas = self.cargar_datos()
+
+    def cargar_datos(self):
+        """Carga la información de las plantas desde el archivo JSON."""
+        try:
+            with open(self.data_path, "r", encoding="utf-8") as f:
+                data = json.load(f)
+                # Convertimos la lista a diccionario con nombre original
+                return {planta["nombre"]: planta for planta in data}
+        except FileNotFoundError:
+            print("⚠️ Archivo de plantas no encontrado, usando base vacía.")
+            return {}
+
+    def obtener_info_planta(self, nombre_planta):
+        """Devuelve los parámetros de una planta específica."""
+        return self.plantas.get(nombre_planta.title(), None)
+
+    def recomendar_riego(self, nombre_planta, humedad_actual, temperatura_actual):
+        """
+        Devuelve una recomendación textual según las condiciones actuales comparadas
+        con los valores óptimos y explica qué reglas se activaron.
+        """
+        planta = self.obtener_info_planta(nombre_planta)
+        if not planta:
+            return "❌ No se encontró información de esta planta."
+
+        mensaje = f"🌿 Recomendación para {nombre_planta.capitalize()}:\n"
+        reglas_activadas = []
+
+        hum_min, hum_max = planta["humedad_suelo_opt"]
+        temp_min, temp_max = planta["temperatura_opt"]
+
+        # Evaluación de humedad
+        if humedad_actual < hum_min:
+            mensaje += "- Humedad baja: aumentar riego.\n"
+            reglas_activadas.append("humedad_actual < humedad_optima → aumentar riego")
+        elif humedad_actual > hum_max:
+            mensaje += "- Humedad alta: reducir riego.\n"
+            reglas_activadas.append("humedad_actual > humedad_optima → reducir riego")
+        else:
+            mensaje += "- Humedad dentro del rango óptimo.\n"
+            reglas_activadas.append("humedad_actual dentro de rango → mantener riego")
+
+        # Evaluación de temperatura
+        if temperatura_actual < temp_min:
+            mensaje += "- Temperatura baja: riego moderado.\n"
+            reglas_activadas.append("temperatura_actual < temperatura_optima → riego moderado")
+        elif temperatura_actual > temp_max:
+            mensaje += "- Temperatura alta: aumentar riego.\n"
+            reglas_activadas.append("temperatura_actual > temperatura_optima → aumentar riego")
+        else:
+            mensaje += "- Temperatura ideal para el cultivo.\n"
+            reglas_activadas.append("temperatura_actual dentro de rango → riego normal")
+
+        # Consejos adicionales de la planta
+        mensaje += f"💡 Consejos: {planta['consejos']}\n"
+
+        # Mostrar reglas activadas
+        mensaje += "\n📜 Reglas activadas:\n"
+        for regla in reglas_activadas:
+            mensaje += f"- {regla}\n"
+
+        return mensaje
+
+
+kb = KnowledgeBase("data/plantas.json")
+PLANT_KB: Dict[str, Dict[str, Any]] = kb.plantas
 PLANTS = list(PLANT_KB.keys())
 
 

@@ -1,0 +1,69 @@
+2025-10-29 21:14:27,245 - INFO - Irrigation calculation initiated for plant Tomate with inputs: temp=25.0, soil_humidity=30.0, rain_prob=10.0, air_humidity=40.0, wind=8.0
+2025-10-29 21:14:27,261 - INFO - Irrigation decision for Tomate: time=27.50 min, frequency=2.10 x/day
+2025-10-29 21:14:27,286 - INFO - Saving history record for plant Tomate: time=27.5, frequency=2.1
+2025-10-29 21:14:51,759 - INFO - Irrigation calculation initiated for plant Tomate with inputs: temp=25.0, soil_humidity=30.0, rain_prob=10.0, air_humidity=40.0, wind=8.0
+2025-10-29 21:14:51,761 - INFO - Irrigation decision for Tomate: time=27.50 min, frequency=2.10 x/day
+2025-10-29 21:14:51,767 - INFO - Saving history record for plant Tomate: time=27.5, frequency=2.1
+2025-10-29 21:46:29,146 - INFO - Irrigation calculation initiated for plant Tomate with inputs: temp=25.0, soil_humidity=30.0, rain_prob=10.0, air_humidity=40.0, wind=8.0
+2025-10-29 21:46:29,164 - INFO - Irrigation decision for Tomate: time=27.50 min, frequency=2.10 x/day
+2025-10-29 21:46:29,178 - INFO - Saving history record for plant Tomate: time=27.5, frequency=2.1
+2025-10-29 22:59:35,740 - INFO - Irrigation calculation initiated for plant Tomate with inputs: temp=25.0, soil_humidity=30.0, rain_prob=10.0, air_humidity=40.0, wind=8.0
+2025-10-29 22:59:35,757 - INFO - Irrigation decision for Tomate: time=27.50 min, frequency=2.10 x/day
+2025-10-29 22:59:35,771 - INFO - Saving history record for plant Tomate: time=27.5, frequency=2.1
+2025-10-29 22:59:44,884 - INFO - Irrigation calculation initiated for plant Tomate with inputs: temp=25.0, soil_humidity=30.0, rain_prob=10.0, air_humidity=40.0, wind=8.0
+2025-10-29 22:59:44,886 - INFO - Irrigation decision for Tomate: time=27.50 min, frequency=2.10 x/day
+2025-10-29 22:59:44,892 - INFO - Saving history record for plant Tomate: time=27.5, frequency=2.1
+2025-10-29 22:59:49,094 - INFO - Irrigation calculation initiated for plant Tomate with inputs: temp=25.0, soil_humidity=30.0, rain_prob=10.0, air_humidity=40.0, wind=8.0
+2025-10-29 22:59:49,096 - INFO - Irrigation decision for Tomate: time=27.50 min, frequency=2.10 x/day
+2025-10-29 22:59:49,102 - INFO - Saving history record for plant Tomate: time=27.5, frequency=2.1
+2025-10-29 22:59:56,794 - INFO - Irrigation calculation initiated for plant Tomate with inputs: temp=25.0, soil_humidity=30.0, rain_prob=10.0, air_humidity=40.0, wind=8.0
+2025-10-29 22:59:56,796 - INFO - Irrigation decision for Tomate: time=27.50 min, frequency=2.10 x/day
+2025-10-29 22:59:56,802 - INFO - Saving history record for plant Tomate: time=27.5, frequency=2.1
+2025-10-29 23:00:08,150 - INFO - Irrigation calculation initiated for plant Tomate with inputs: temp=25.0, soil_humidity=30.0, rain_prob=10.0, air_humidity=40.0, wind=8.0
+2025-10-29 23:00:08,151 - INFO - Irrigation decision for Tomate: time=27.50 min, frequency=2.10 x/day
+2025-10-29 23:00:08,157 - INFO - Saving history record for plant Tomate: time=27.5, frequency=2.1
+2025-10-29 23:10:24,678 - INFO - Irrigation calculation initiated for plant Tomate with inputs: temp=25.0, soil_humidity=30.0, rain_prob=10.0, air_humidity=40.0, wind=8.0
+2025-10-29 23:10:24,693 - INFO - Irrigation decision for Tomate: time=27.50 min, frequency=2.10 x/day
+2025-10-29 23:10:24,699 - INFO - Saving history record for plant Tomate: time=27.5, frequency=2.1
+2025-10-29 23:10:53,152 - INFO - Irrigation calculation initiated for plant Tomate with inputs: temp=25.0, soil_humidity=30.0, rain_prob=10.0, air_humidity=40.0, wind=8.0
+2025-10-29 23:10:53,154 - INFO - Irrigation decision for Tomate: time=27.50 min, frequency=2.10 x/day
+2025-10-29 23:10:53,160 - INFO - Saving history record for plant Tomate: time=27.5, frequency=2.1
+2025-10-29 23:16:41,030 - INFO - Irrigation calculation initiated for plant Tomate with inputs: temp=25.0, soil_humidity=30.0, rain_prob=10.0, air_humidity=40.0, wind=8.0
+2025-10-29 23:16:41,047 - INFO - Irrigation decision for Tomate: time=27.50 min, frequency=2.10 x/day
+2025-10-29 23:16:41,052 - INFO - Saving history record for plant Tomate: time=27.5, frequency=2.1
+2025-10-29 23:28:27,933 - INFO - Irrigation calculation initiated for plant Tomate with inputs: temp=25.0, soil_humidity=30.0, rain_prob=10.0, air_humidity=40.0, wind=8.0
+2025-10-29 23:28:27,949 - INFO - Irrigation decision for Tomate: time=27.50 min, frequency=2.10 x/day
+2025-10-29 23:28:27,956 - INFO - Saving history record for plant Tomate: time=27.5, frequency=2.1
+2025-10-29 23:32:49,942 - INFO - Irrigation calculation initiated for plant Tomate with inputs: temp=25.0, soil_humidity=30.0, rain_prob=10.0, air_humidity=40.0, wind=8.0
+2025-10-29 23:32:49,958 - INFO - Irrigation decision for Tomate: time=27.50 min, frequency=2.10 x/day
+2025-10-29 23:32:49,965 - INFO - Saving history record for plant Tomate: time=27.5, frequency=2.1
+2025-10-29 23:35:18,390 - INFO - Irrigation calculation initiated for plant Tomate with inputs: temp=25.0, soil_humidity=30.0, rain_prob=10.0, air_humidity=40.0, wind=8.0
+2025-10-29 23:35:18,406 - INFO - Irrigation decision for Tomate: time=27.50 min, frequency=2.10 x/day
+2025-10-29 23:35:18,411 - INFO - Saving history record for plant Tomate: time=27.5, frequency=2.1
+2025-10-29 23:35:33,022 - INFO - Irrigation calculation initiated for plant Lechuga with inputs: temp=25.0, soil_humidity=30.0, rain_prob=10.0, air_humidity=40.0, wind=8.0
+2025-10-29 23:35:33,023 - INFO - Irrigation decision for Lechuga: time=24.75 min, frequency=2.03 x/day
+2025-10-29 23:35:33,029 - INFO - Saving history record for plant Lechuga: time=24.75, frequency=2.03
+2025-10-29 23:45:47,349 - INFO - Irrigation calculation initiated for plant Tomate with inputs: temp=25.0, soil_humidity=30.0, rain_prob=10.0, air_humidity=40.0, wind=8.0
+2025-10-29 23:45:47,366 - INFO - Irrigation decision for Tomate: time=27.50 min, frequency=2.01 x/day
+2025-10-29 23:45:47,428 - INFO - Saving history record for plant Tomate: time=27.5, frequency=2.01
+2025-10-29 23:45:52,899 - INFO - Irrigation calculation initiated for plant Tomate with inputs: temp=25.0, soil_humidity=30.0, rain_prob=10.0, air_humidity=40.0, wind=8.0
+2025-10-29 23:45:52,900 - INFO - Irrigation decision for Tomate: time=27.50 min, frequency=2.01 x/day
+2025-10-29 23:45:52,908 - INFO - Saving history record for plant Tomate: time=27.5, frequency=2.01
+2025-10-29 23:47:11,943 - INFO - Irrigation calculation initiated for plant Tomate with inputs: temp=25.0, soil_humidity=30.0, rain_prob=10.0, air_humidity=40.0, wind=8.0
+2025-10-29 23:47:11,958 - INFO - Irrigation decision for Tomate: time=27.50 min, frequency=2.01 x/day
+2025-10-29 23:47:11,968 - INFO - Saving history record for plant Tomate: time=27.5, frequency=2.01
+2025-10-29 23:49:31,254 - INFO - Irrigation calculation initiated for plant Tomate with inputs: temp=25.0, soil_humidity=30.0, rain_prob=10.0, air_humidity=40.0, wind=8.0
+2025-10-29 23:49:31,268 - INFO - Irrigation decision for Tomate: time=27.50 min, frequency=2.01 x/day
+2025-10-29 23:49:31,278 - INFO - Saving history record for plant Tomate: time=27.5, frequency=2.01
+2025-10-30 00:06:10,566 - INFO - Irrigation calculation initiated for plant Tomate with inputs: temp=25.0, soil_humidity=30.0, rain_prob=10.0, air_humidity=40.0, wind=8.0
+2025-10-30 00:06:10,581 - INFO - Irrigation decision for Tomate: time=27.50 min, frequency=2.01 x/day
+2025-10-30 00:06:10,591 - INFO - Saving history record for plant Tomate: time=27.5, frequency=2.01
+2025-10-30 00:08:19,101 - INFO - Irrigation calculation initiated for plant Tomate with inputs: temp=25.0, soil_humidity=30.0, rain_prob=10.0, air_humidity=40.0, wind=8.0
+2025-10-30 00:08:19,115 - INFO - Irrigation decision for Tomate: time=27.50 min, frequency=2.01 x/day
+2025-10-30 00:08:19,146 - INFO - Saving history record for plant Tomate: time=27.5, frequency=2.01
+2025-10-30 00:13:59,477 - INFO - Irrigation calculation initiated for plant Tomate with inputs: temp=25.0, soil_humidity=30.0, rain_prob=10.0, air_humidity=40.0, wind=8.0
+2025-10-30 00:13:59,491 - INFO - Irrigation decision for Tomate: time=27.50 min, frequency=2.01 x/day
+2025-10-30 00:13:59,500 - INFO - Saving history record for plant Tomate: time=27.5, frequency=2.01
+2025-10-30 00:20:38,989 - INFO - Irrigation calculation initiated for plant Tomate with inputs: temp=25.0, soil_humidity=30.0, rain_prob=10.0, air_humidity=40.0, wind=8.0
+2025-10-30 00:20:39,004 - INFO - Irrigation decision for Tomate: time=27.50 min, frequency=2.01 x/day
+2025-10-30 00:20:39,024 - INFO - Saving history record for plant Tomate: time=27.5, frequency=2.01

@@ -62,5 +62,37 @@
     "factor_ajuste": 1.0,
     "tolerancia_extremos": "baja",
     "consejos": "Evitar encharcar; riego frecuente y ligero."
+  },
+  {
+    "nombre": "Papa",
+    "humedad_suelo_opt": [50, 75],
+    "temperatura_opt": [12, 25],
+    "factor_ajuste": 0.95,
+    "tolerancia_extremos": "media",
+    "consejos": "Riego uniforme durante tubérculo, reducir al final."
+  },
+  {
+    "nombre": "Cebolla",
+    "humedad_suelo_opt": [40, 70],
+    "temperatura_opt": [15, 30],
+    "factor_ajuste": 0.85,
+    "tolerancia_extremos": "media",
+    "consejos": "Prefiere suelo húmedo pero no mojado; riego moderado."
+  },
+  {
+    "nombre": "Apio",
+    "humedad_suelo_opt": [70, 90],
+    "temperatura_opt": [10, 24],
+    "factor_ajuste": 1.1,
+    "tolerancia_extremos": "baja",
+    "consejos": "Necesita humedad constante; riego frecuente."
+  },
+  {
+    "nombre": "Manzano",
+    "humedad_suelo_opt": [40, 70],
+    "temperatura_opt": [15, 28],
+    "factor_ajuste": 0.9,
+    "tolerancia_extremos": "alta",
+    "consejos": "Riego profundo pero espaciado; evitar exceso."
   }
 ]

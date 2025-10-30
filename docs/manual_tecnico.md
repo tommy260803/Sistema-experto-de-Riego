@@ -1,1 +1,0 @@
-# Manual Técnico\n\n- Arquitectura general del sistema.\n- Diseño del motor de lógica difusa (Mamdani).\n- Variables, funciones de membresía y reglas.\n- Estructura de datos y persistencia.\n- Cómo extender reglas y plantas.\n

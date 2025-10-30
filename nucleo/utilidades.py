@@ -1,10 +1,19 @@
 from __future__ import annotations
 import json
+import logging
 import os
 import time
 from dataclasses import dataclass
 from typing import Any, Dict, List, Tuple
 import pandas as pd
+
+# Ensure logs directory exists before logging setup
+os.makedirs("logs", exist_ok=True)
+
+# Configure logging
+logging.basicConfig(filename='logs/irrigation.log', level=logging.INFO,
+                    format='%(asctime)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
 
 DATA_DIR = "data"
 HISTORY_CSV = os.path.join(DATA_DIR, "history.csv")
@@ -16,6 +25,8 @@ SCENARIOS_JSON = os.path.join(DATA_DIR, "escenarios_prueba.json")
 def ensure_data_files() -> None:
     """Ensure required data directories/files exist with defaults."""
     os.makedirs(DATA_DIR, exist_ok=True)
+    os.makedirs("logs", exist_ok=True)
+
     if not os.path.exists(HISTORY_CSV):
         pd.DataFrame(
             columns=[
@@ -62,6 +73,8 @@ def validate_inputs(
 def save_history(record: Dict[str, Any]) -> None:
     """Append a decision record to history files."""
     ensure_data_files()
+    logger.info(f"Saving history record for plant {record.get('planta')}: time={record.get('tiempo_min')}, frequency={record.get('frecuencia')}")
+
     # CSV
     df = pd.DataFrame([record])
     if os.path.exists(HISTORY_CSV):
