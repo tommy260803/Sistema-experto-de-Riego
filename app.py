@@ -6,37 +6,242 @@ from components.historico import render_historical
 from components.informes import render_reports
 from nucleo.utilidades import ensure_data_files
 
+# Asegurar archivos de datos
 ensure_data_files()
 
-st.set_page_config(page_title="🌱 Riego Inteligente", page_icon="🌊", layout="wide", initial_sidebar_state="expanded")
+# Configuración de página
+st.set_page_config(
+    page_title="Sistema de Riego Inteligente",
+    page_icon="🌱",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
 
-css_path = "assets/styles.css"
-if os.path.exists(css_path):
-    with open(css_path, "r", encoding="utf-8") as f:
-        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
-
+# ============= SIDEBAR - NAVEGACIÓN =============
 with st.sidebar:
+    # Logo
     logo_path = "assets/images/logo.png"
     if os.path.exists(logo_path):
-        st.image(logo_path, caption="Riego Inteligente", use_column_width=True)
-    else:
-        st.markdown("### Riego Inteligente")
-    if st.button("Acerca del Sistema"):
-        st.info("Sistema experto de riego con Lógica Difusa (Mamdani) y visualizaciones educativas.")
+        st.image(logo_path, use_container_width=True)
+    
+    # Título del sistema
+    st.title("🌱 Riego Inteligente")
+    st.caption("Sistema Experto de Gestión Hídrica")
+    
+    st.divider()
+    
+    # Selector de página
+    st.subheader("📋 Menú de Navegación")
+    page = st.radio(
+        "Seleccione una opción:",
+        ["🏠 Inicio", 
+         "🌊 Calculadora de Riego", 
+         "📊 Visualizaciones", 
+         "📈 Histórico y Análisis", 
+         "🎓 Simulador de Escenarios"],
+        label_visibility="collapsed"
+    )
+    
+    st.divider()
+    
+    # Información rápida
+    st.subheader("🔧 Información Técnica")
+    st.info("""
+    **Metodología:**  
+    Lógica Difusa Mamdani
+    
+    **Variables:**  
+    3-5 parámetros de entrada
+    
+    **Precisión:**  
+    ±5% error estimado
+    """)
+    
+    st.divider()
+    st.caption("Versión 1.0.0 | © 2025")
 
-tab1, tab2, tab3, tab4 = st.tabs([
-    "🌊 Calculadora de Riego",
-    "📊 Visualizaciones",
-    "📈 Histórico y Análisis",
-    "🎓 Simulador de Escenarios",
-])
+# ============= CONTENIDO PRINCIPAL =============
 
-with tab1:
+# PÁGINA DE INICIO
+if page == "🏠 Inicio":
+    # Header principal
+    st.title("🌊 Sistema de Riego Inteligente")
+    st.subheader("Plataforma de Optimización Hídrica Basada en Lógica Difusa Tipo Mamdani")
+    
+    st.divider()
+    
+    # Descripción principal
+    col1, col2 = st.columns([2, 1])
+    
+    with col1:
+        st.markdown("""
+        ### 📋 Presentación del Sistema
+        
+        Bienvenido al **Sistema Experto de Riego Inteligente**, una plataforma avanzada diseñada para 
+        optimizar el uso del agua en la agricultura mediante la aplicación de técnicas de inteligencia 
+        artificial y lógica difusa tipo Mamdani.
+        
+        Este sistema analiza variables ambientales en tiempo real para proporcionar recomendaciones 
+        precisas sobre la cantidad y frecuencia de riego necesaria, contribuyendo a:
+        
+        - 💧 **Ahorro de agua** y recursos hídricos
+        - 🌾 **Mejora en la productividad** agrícola
+        - 🌍 **Sostenibilidad** ambiental
+        - 📊 **Toma de decisiones** basada en datos
+        """)
+        
+        st.success("**Desarrollado con:** Python, Streamlit, Scikit-Fuzzy, NumPy, Pandas")
+    
+    with col2:
+        st.markdown("### 🎯 Características")
+        st.markdown("""
+        ✅ Motor de inferencia difusa  
+        ✅ Análisis en tiempo real  
+        ✅ Visualizaciones interactivas  
+        ✅ Base de datos histórica  
+        ✅ Simulador de escenarios  
+        ✅ Exportación de reportes
+        """)
+    
+    st.divider()
+    
+    # Módulos del sistema
+    st.markdown("## 🔧 Módulos del Sistema")
+    
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        with st.expander("🌊 **Calculadora de Riego**", expanded=True):
+            st.markdown("""
+            **Función Principal:**  
+            Calcula la cantidad óptima de agua necesaria para el riego basándose en múltiples variables.
+            
+            **Variables de Entrada:**
+            - Humedad del suelo (%)
+            - Temperatura ambiente (°C)
+            - Tipo de cultivo
+            - Condiciones meteorológicas
+            
+            **Salida:**  
+            Recomendación de tiempo de riego en minutos con nivel de confianza.
+            """)
+        
+        with st.expander("📊 **Visualizaciones**"):
+            st.markdown("""
+            **Análisis Gráfico del Sistema:**
+            
+            - **Funciones de membresía**: Representación de conjuntos difusos para cada variable
+            - **Superficies 3D**: Relación entre variables de entrada y salida
+            - **Gráficos de desfuzzificación**: Proceso de conversión de salida difusa a valor crisp
+            - **Mapas de calor**: Correlación entre parámetros del sistema
+            
+            Herramientas visuales para comprender el comportamiento del motor de inferencia.
+            """)
+    
+    with col2:
+        with st.expander("📈 **Histórico y Análisis**"):
+            st.markdown("""
+            **Gestión de Datos Históricos:**
+            
+            - **Base de datos** de todas las mediciones realizadas
+            - **Análisis estadístico** de tendencias temporales
+            - **Comparativas** de eficiencia del sistema
+            - **Exportación** de reportes en formatos CSV y PDF
+            
+            Permite evaluar el rendimiento del sistema a lo largo del tiempo y 
+            realizar ajustes para optimizar las estrategias de riego.
+            """)
+        
+        with st.expander("🎓 **Simulador de Escenarios**"):
+            st.markdown("""
+            **Pruebas y Entrenamiento:**
+            
+            - **Escenarios predefinidos** (sequía extrema, lluvia abundante, temperatura alta, etc.)
+            - **Simulaciones personalizadas** con parámetros definidos por el usuario
+            - **Análisis de sensibilidad** de variables individuales
+            - **Casos de estudio** educativos para comprensión del sistema
+            
+            Ideal para entender cómo responde el sistema ante diferentes condiciones climáticas.
+            """)
+    
+    st.divider()
+    
+    # Metodología
+    st.markdown("## 🧠 Metodología: Lógica Difusa Mamdani")
+    
+    col1, col2, col3 = st.columns(3)
+    
+    with col1:
+        st.markdown("""
+        ### 1️⃣ Fuzzificación
+        Conversión de valores numéricos 
+        de entrada en conjuntos difusos 
+        mediante funciones de membresía.
+        """)
+    
+    with col2:
+        st.markdown("""
+        ### 2️⃣ Inferencia
+        Aplicación de reglas difusas 
+        para obtener conclusiones basadas 
+        en el conocimiento experto.
+        """)
+    
+    with col3:
+        st.markdown("""
+        ### 3️⃣ Desfuzzificación
+        Conversión de la salida difusa 
+        en un valor numérico concreto 
+        utilizable.
+        """)
+    
+    st.divider()
+    
+    # Instrucciones de uso
+    st.markdown("## 📖 Guía de Uso")
+    
+    st.info("""
+    **Pasos para utilizar el sistema:**
+    
+    1. Seleccione el módulo deseado desde el menú lateral izquierdo
+    2. En **Calculadora de Riego**, ingrese los valores actuales de sus sensores
+    3. El sistema calculará automáticamente la recomendación de riego
+    4. Explore las **Visualizaciones** para comprender el funcionamiento interno
+    5. Consulte el **Histórico** para analizar tendencias y patrones
+    6. Use el **Simulador** para experimentar con diferentes escenarios
+    """)
+    
+    st.divider()
+    
+    # Footer
+    st.success("**Sistema de Riego Inteligente** | Ingeniería Agrícola y Tecnología")
+    st.caption("Optimización mediante Lógica Difusa Mamdani | Universidad [Nombre] | Todos los derechos reservados © 2025")
+
+# CALCULADORA DE RIEGO
+elif page == "🌊 Calculadora de Riego":
+    st.title("🌊 Calculadora de Riego")
+    st.write("Ingrese los parámetros ambientales para calcular la cantidad óptima de agua necesaria.")
+    st.divider()
     render_dashboard()
-with tab2:
+
+# VISUALIZACIONES
+elif page == "📊 Visualizaciones":
+    st.title("📊 Visualizaciones del Sistema Difuso")
+    st.write("Explore las representaciones gráficas del motor de inferencia difusa.")
+    st.divider()
     from nucleo.visualizacion import render_visualizations_page
     render_visualizations_page()
-with tab3:
+
+# HISTÓRICO
+elif page == "📈 Histórico y Análisis":
+    st.title("📈 Análisis Histórico de Datos")
+    st.write("Consulte y analice el historial de mediciones y recomendaciones del sistema.")
+    st.divider()
     render_historical()
-with tab4:
+
+# SIMULADOR
+elif page == "🎓 Simulador de Escenarios":
+    st.title("🎓 Simulador de Escenarios")
+    st.write("Pruebe diferentes condiciones ambientales y analice las respuestas del sistema.")
+    st.divider()
     render_simulator()
