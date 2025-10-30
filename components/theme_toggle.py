@@ -296,7 +296,28 @@ class ThemeToggle:
                 max-width: 100% !important;
             }}
             [data-testid="stSidebar"] {{
-                display: none !important;
+                position: fixed !important;
+                left: -100% !important;
+                top: 0 !important;
+                height: 100vh !important;
+                width: 280px !important;
+                z-index: 999 !important;
+                transition: left 0.3s ease !important;
+            }}
+            /* Show sidebar when expanded */
+            [data-testid="stSidebar"][aria-expanded="true"] {{
+                left: 0 !important;
+            }}
+            /* Ensure hamburger menu is visible */
+            [data-testid="stSidebarNav"] {{
+                display: block !important;
+                opacity: 1 !important;
+                position: fixed !important;
+                top: 12px !important;
+                left: 12px !important;
+                z-index: 1000 !important;
+                background: var(--theme-primary) !important;
+                border-radius: 4px !important;
             }}
             .stButton button {{
                 padding: 12px 16px !important;
