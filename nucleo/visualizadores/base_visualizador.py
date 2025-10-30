@@ -314,15 +314,6 @@ def renderizar_pagina_visualizaciones() -> None:
     with tab_sensitivity:
         visualizer.plot_sensitivity_analysis(st.session_state.current_inputs)
 
-    with tab_history:
-        try:
-            from ..utilidades import load_history
-            df = load_history()
-            visualizer.plot_historical_analysis(df)
-        except Exception as e:
-            st.error(f"Error cargando histórico: {e}")
-            st.info("� No hay datos históricos disponibles o no se pudo cargar el módulo de utilidades")
-
 
 # ===================== FUNCIONES LEGACY (COMPATIBILIDAD) =========================
 
