@@ -115,4 +115,47 @@ body {
     .sidebar .stRadio {
         font-size: 0.9rem;
     }
+
+    /* Ensure sidebar toggle is visible on mobile */
+    [data-testid="stSidebarNav"] {
+        display: block !important;
+        visibility: visible !important;
+    }
+
+    /* Force sidebar collapse/close button to be visible */
+    .st-emotion-cache-1h2d8ls .st-emotion-cache-1dp5vir {
+        display: block !important;
+        visibility: visible !important;
+    }
+
+    /* Mobile hamburger menu styling */
+    button[data-testid="stSidebarNav"] {
+        background: var(--accent-primary) !important;
+        color: var(--text-primary) !important;
+        border-radius: 0.5rem !important;
+        padding: 0.5rem !important;
+        z-index: 1000 !important;
+    }
+
+    /* Ensure sidebar content is stackable on mobile */
+    .sidebar {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: auto !important;
+        max-height: 50vh !important;
+        overflow-y: auto !important;
+        background: var(--bg-secondary) !important;
+        z-index: 999 !important;
+    }
+
+    /* Hide sidebar on mobile by default, show with toggle */
+    [data-testid="stSidebar"] {
+        display: none;
+    }
+
+    [data-testid="stSidebar"][aria-expanded="true"] {
+        display: block !important;
+    }
 }
