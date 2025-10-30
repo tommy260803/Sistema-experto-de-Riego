@@ -368,5 +368,235 @@
     "planta": "Tomate",
     "tiempo_min": 30.25,
     "frecuencia": 2.01
+  },
+  {
+    "temperatura": 40.04,
+    "humedad_suelo": 30.0,
+    "prob_lluvia": 10.0,
+    "humedad_ambiente": 40.0,
+    "velocidad_viento": 8.0,
+    "planta": "Tomate",
+    "tiempo_min": 30.25,
+    "frecuencia": 2.01
+  },
+  {
+    "temperatura": 39.55,
+    "humedad_suelo": 66.62,
+    "prob_lluvia": 53.66,
+    "humedad_ambiente": 83.31,
+    "velocidad_viento": 31.41,
+    "planta": "Lechuga",
+    "tiempo_min": 14.96,
+    "frecuencia": 2.36
+  },
+  {
+    "temperatura": 25.0,
+    "humedad_suelo": 30.0,
+    "prob_lluvia": 10.0,
+    "humedad_ambiente": 40.0,
+    "velocidad_viento": 8.0,
+    "planta": "Tomate",
+    "tiempo_min": 30.25,
+    "frecuencia": 2.01
+  },
+  {
+    "temperatura": 25.0,
+    "humedad_suelo": 30.0,
+    "prob_lluvia": 10.0,
+    "humedad_ambiente": 40.0,
+    "velocidad_viento": 8.0,
+    "planta": "Tomate",
+    "tiempo_min": 30.25,
+    "frecuencia": 2.01
+  },
+  {
+    "temperatura": 25.0,
+    "humedad_suelo": 57.63,
+    "prob_lluvia": 10.0,
+    "humedad_ambiente": 40.0,
+    "velocidad_viento": 8.0,
+    "planta": "Tomate",
+    "tiempo_min": 23.02,
+    "frecuencia": 1.83
+  },
+  {
+    "temperatura": 34.19,
+    "humedad_suelo": 57.63,
+    "prob_lluvia": 10.0,
+    "humedad_ambiente": 40.0,
+    "velocidad_viento": 8.0,
+    "planta": "Tomate",
+    "tiempo_min": 23.02,
+    "frecuencia": 1.83
+  },
+  {
+    "temperatura": 34.19,
+    "humedad_suelo": 57.63,
+    "prob_lluvia": 44.82,
+    "humedad_ambiente": 40.0,
+    "velocidad_viento": 8.0,
+    "planta": "Tomate",
+    "tiempo_min": 11.5,
+    "frecuencia": 1.7
+  },
+  {
+    "temperatura": 25.0,
+    "humedad_suelo": 30.0,
+    "prob_lluvia": 10.0,
+    "humedad_ambiente": 40.0,
+    "velocidad_viento": 8.0,
+    "planta": "Tomate",
+    "tiempo_min": 30.25,
+    "frecuencia": 2.01
+  },
+  {
+    "temperatura": 25.0,
+    "humedad_suelo": 30.0,
+    "prob_lluvia": 10.0,
+    "humedad_ambiente": 40.0,
+    "velocidad_viento": 8.0,
+    "planta": "Tomate",
+    "tiempo_min": 30.25,
+    "frecuencia": 2.01
+  },
+  {
+    "temperatura": 25.0,
+    "humedad_suelo": 30.0,
+    "prob_lluvia": 10.0,
+    "humedad_ambiente": 40.0,
+    "velocidad_viento": 8.0,
+    "planta": "Tomate",
+    "tiempo_min": 30.25,
+    "frecuencia": 2.01
+  },
+  {
+    "temperatura": 25.0,
+    "humedad_suelo": 30.0,
+    "prob_lluvia": 10.0,
+    "humedad_ambiente": 40.0,
+    "velocidad_viento": 8.0,
+    "planta": "Tomate",
+    "tiempo_min": 30.25,
+    "frecuencia": 2.01
+  },
+  {
+    "temperatura": 25.0,
+    "humedad_suelo": 30.0,
+    "prob_lluvia": 10.0,
+    "humedad_ambiente": 40.0,
+    "velocidad_viento": 8.0,
+    "planta": "Tomate",
+    "tiempo_min": 30.25,
+    "frecuencia": 2.01
+  },
+  {
+    "temperatura": 35.06,
+    "humedad_suelo": 30.0,
+    "prob_lluvia": 10.0,
+    "humedad_ambiente": 40.0,
+    "velocidad_viento": 8.0,
+    "planta": "Tomate",
+    "tiempo_min": 30.25,
+    "frecuencia": 2.01
+  },
+  {
+    "temperatura": 25.0,
+    "humedad_suelo": 30.0,
+    "prob_lluvia": 10.0,
+    "humedad_ambiente": 40.0,
+    "velocidad_viento": 8.0,
+    "planta": "Tomate",
+    "tiempo_min": 30.25,
+    "frecuencia": 2.01
+  },
+  {
+    "temperatura": 25.0,
+    "humedad_suelo": 30.0,
+    "prob_lluvia": 10.0,
+    "humedad_ambiente": 40.0,
+    "velocidad_viento": 8.0,
+    "planta": "Tomate",
+    "tiempo_min": 30.25,
+    "frecuencia": 2.01
+  },
+  {
+    "temperatura": 45.0,
+    "humedad_suelo": 30.0,
+    "prob_lluvia": 10.0,
+    "humedad_ambiente": 40.0,
+    "velocidad_viento": 8.0,
+    "planta": "Tomate",
+    "tiempo_min": 30.25,
+    "frecuencia": 2.01
+  },
+  {
+    "temperatura": 45.0,
+    "humedad_suelo": 30.0,
+    "prob_lluvia": 10.0,
+    "humedad_ambiente": 40.0,
+    "velocidad_viento": 8.0,
+    "planta": "Tomate",
+    "tiempo_min": 30.25,
+    "frecuencia": 2.01
+  },
+  {
+    "temperatura": 25.0,
+    "humedad_suelo": 30.0,
+    "prob_lluvia": 42.91,
+    "humedad_ambiente": 40.0,
+    "velocidad_viento": 8.0,
+    "planta": "Tomate",
+    "tiempo_min": 23.35,
+    "frecuencia": 2.01
+  },
+  {
+    "temperatura": 25.0,
+    "humedad_suelo": 30.0,
+    "prob_lluvia": 10.0,
+    "humedad_ambiente": 80.95,
+    "velocidad_viento": 8.0,
+    "planta": "Tomate",
+    "tiempo_min": 30.25,
+    "frecuencia": 1.66
+  },
+  {
+    "temperatura": 36.26,
+    "humedad_suelo": 71.35,
+    "prob_lluvia": 68.7,
+    "humedad_ambiente": 55.16,
+    "velocidad_viento": 25.18,
+    "planta": "Tomate",
+    "tiempo_min": 9.32,
+    "frecuencia": 2.52
+  },
+  {
+    "temperatura": 25.0,
+    "humedad_suelo": 30.0,
+    "prob_lluvia": 10.0,
+    "humedad_ambiente": 40.0,
+    "velocidad_viento": 8.0,
+    "planta": "Tomate",
+    "tiempo_min": 30.25,
+    "frecuencia": 2.01
+  },
+  {
+    "temperatura": 25.0,
+    "humedad_suelo": 30.0,
+    "prob_lluvia": 10.0,
+    "humedad_ambiente": 40.0,
+    "velocidad_viento": 8.0,
+    "planta": "Tomate",
+    "tiempo_min": 30.25,
+    "frecuencia": 2.01
+  },
+  {
+    "temperatura": 45.0,
+    "humedad_suelo": 92.15,
+    "prob_lluvia": 64.28,
+    "humedad_ambiente": 58.44,
+    "velocidad_viento": 21.65,
+    "planta": "Tomate",
+    "tiempo_min": 7.77,
+    "frecuencia": 2.53
   }
 ]

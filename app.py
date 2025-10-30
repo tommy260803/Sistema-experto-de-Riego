@@ -16,6 +16,11 @@ ThemeToggle.initialize_theme()
 if 'theme' not in st.session_state:
     st.session_state.theme = 'dark'  # Tema oscuro por defecto
 
+# Restore page after theme change rerun
+if 'page_restore' in st.session_state:
+    st.session_state.current_page = st.session_state.page_restore
+    del st.session_state.page_restore
+
 # Configuración de página
 ThemeToggle.setup_page_config()
 
@@ -40,15 +45,27 @@ with st.sidebar:
 
     # Selector de página
     st.subheader("📋 Menú de Navegación")
-    page = st.radio(
-        "Seleccione una opción:",
-        ["🏠 Inicio",
-         "🌊 Calculadora de Riego",
-         "📊 Visualizaciones",
-         "📈 Histórico y Análisis",
-         "🎓 Simulador de Escenarios"],
-        label_visibility="collapsed"
-    )
+
+    page_options = ["🏠 Inicio", "🌊 Calculadora de Riego", "📊 Visualizaciones", "📈 Histórico y Análisis", "🎓 Simulador de Escenarios"]
+
+    # Maintain page selection
+    if 'current_page' not in st.session_state:
+        st.session_state.current_page = page_options[0]
+
+    page = st.session_state.current_page
+
+    # Navigation buttons in vertical list
+    for i, option in enumerate(page_options):
+        is_selected = st.session_state.current_page == option
+        if st.button(
+            option,
+            key=f"nav_{i}_{option}",
+            use_container_width=True,
+            type="primary" if is_selected else "secondary",
+            help=f"Ir a {option}"
+        ):
+            st.session_state.current_page = option
+            page = option
 
     st.divider()
 
@@ -242,14 +259,6 @@ elif page == "🌊 Calculadora de Riego":
 
 # VISUALIZACIONES
 elif page == "📊 Visualizaciones":
-    col1, col2 = st.columns([1, 10])
-    with col1:
-        st.image("assets/images/icon-chart.png", width=100)
-    with col2:
-        st.title("Visualizaciones del Sistema Difuso")
-        st.write("Explore las representaciones gráficas del motor de inferencia difusa.")
-    st.divider()
-
     try:
         from nucleo.visualizadores import renderizar_pagina_visualizaciones
         renderizar_pagina_visualizaciones()

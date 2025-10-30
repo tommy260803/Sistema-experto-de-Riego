@@ -111,6 +111,15 @@ def render_simulator() -> None:
             st.markdown("**Condiciones del Escenario**")
             st.json(escenario_actual)
 
+            # Guardar configuración siempre para compartir con visualizaciones
+            st.session_state['simulador_current'] = {
+                'temperature': escenario_actual['temperatura'],
+                'soil_humidity': escenario_actual['humedad_suelo'],
+                'rain_probability': escenario_actual['prob_lluvia'],
+                'air_humidity': escenario_actual['humedad_ambiental'],
+                'wind_speed': escenario_actual['viento']
+            }
+
             # Calcular resultado
             if st.button("🚰 Calcular Riego Recomendado", key="calculate_single"):
                 with st.spinner("Calculando recomendación..."):

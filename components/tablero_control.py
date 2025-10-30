@@ -148,6 +148,16 @@ def render_dashboard() -> None:
         }
         save_history(record)
 
+        # Guardar configuración para compartir con visualizaciones
+        st.session_state['calculadora_current'] = {
+            'temperature': temperatura,
+            'soil_humidity': humedad_suelo,
+            'rain_probability': prob_lluvia,
+            'air_humidity': humedad_ambiental,
+            'wind_speed': viento,
+            'planta': planta
+        }
+
         # Ajuste por planta (educativo)
         st.markdown("---")
         st.subheader("🌱 Ajuste Personalizado por Planta")

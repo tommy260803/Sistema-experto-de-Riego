@@ -15,7 +15,7 @@ from .superficies import VisualizadorSuperficies
 from .reglas import VisualizadorReglas
 from .plantas import VisualizadorPlantas
 from .sensibilidad import VisualizadorSensibilidad
-from .historico import VisualizadorHistorico
+
 from .tablero import RenderizadorTablero
 
 __all__ = [
@@ -27,6 +27,5 @@ __all__ = [
     'VisualizadorReglas',
     'VisualizadorPlantas',
     'VisualizadorSensibilidad',
-    'VisualizadorHistorico',
     'RenderizadorTablero'
 ]

@@ -96,17 +96,19 @@ class ThemeToggle:
         icon_right = "☀️" if st.session_state.theme == 'dark' else "🌙"
 
         with col2:
+            current_label = f"{icon_left} {'Oscuro' if st.session_state.theme == 'dark' else 'Claro'} {icon_right}"
             if st.button(
-                f"{icon_left} {'Oscuro' if st.session_state.theme == 'dark' else 'Claro'} {icon_right}",
-                key="theme_toggle",
+                current_label,
+                key="theme_toggle_button",
                 help=f"Cambiar a modo {'claro' if st.session_state.theme == 'dark' else 'oscuro'}",
                 use_container_width=True
             ):
                 # Cambiar tema
                 st.session_state.theme = 'light' if st.session_state.theme == 'dark' else 'dark'
-                st.session_state.theme_initialized = False
-
-                # Aplicar cambio inmediatamente
+                # Prepare for page restoration
+                if 'current_page' in st.session_state:
+                    st.session_state.page_restore = st.session_state.current_page
+                # Forzar rerun para aplicar cambio CSS inmediatamente
                 st.rerun()
 
         # Mostrar estado actual
@@ -147,14 +149,32 @@ class ThemeToggle:
             background-color: var(--theme-secondary-bg) !important;
         }}
 
+        /* Streamlit Header (toolbar) */
+        [data-testid="stHeader"] {{
+            background-color: var(--theme-bg) !important;
+            border-bottom: 1px solid var(--theme-border) !important;
+        }}
+
+        [data-testid="stHeader"] button, [data-testid="stHeader"] svg {{
+            color: var(--theme-text) !important;
+        }}
+
+        /* Texto general - excluir recomendaciones que tienen color negro forzado */
+        p, span, div:not([class*="st-"]):not(.recommendation-card), label {{
+            color: var(--theme-text) !important;
+        }}
+
         /* Headers */
         h1, h2, h3, h4, h5, h6 {{
             color: var(--theme-text) !important;
         }}
 
-        /* Texto general */
-        p, span, div:not([class*="st-"]), label {{
-            color: var(--theme-text) !important;
+        /* TEXTO EN NEGRO PARA RECOMENDACIONES - FORZADO */
+        div.recommendation-card * {{
+            color: #2C3E50 !important;
+        }}
+        .recommendation-card {{
+            color: #2C3E50 !important;
         }}
 
         /* Tabs */
@@ -209,10 +229,7 @@ class ThemeToggle:
             background-color: var(--theme-secondary-bg) !important;
         }}
 
-        /* Plotly charts */
-        .js-plotly-plot {{
-            background-color: var(--theme-card-bg) !important;
-        }}
+
 
         .plotly-notifier {{
             fill: var(--theme-text) !important;
@@ -240,6 +257,112 @@ class ThemeToggle:
 
         .st-emotion-cache-1v0mbdj, .st-emotion-cache-1r6m2br {{
             color: var(--theme-text) !important;
+        }}
+
+        /* RESPONSIVE DESIGN */
+        /* Tablets y mobile */
+        @media (max-width: 768px) {{
+            .main .block-container {{
+                padding: 0rem 1rem 2rem 1rem !important;
+            }}
+            [data-testid="stSidebar"] {{
+                width: 200px !important;
+            }}
+            [data-testid="stMetricValue"] {{
+                font-size: 20px !important;
+            }}
+            .row-widget.stHorizontalBlock {{
+                flex-direction: column !important;
+            }}
+            .stTabs [data-baseweb="tab-list"] {{
+                display: flex !important;
+                flex-wrap: wrap !important;
+                justify-content: center !important;
+            }}
+            .stTabs [data-baseweb="tab"] {{
+                max-width: 120px !important;
+                margin: 0 2px !important;
+            }}
+            /* Asegurar que las métricas en columnas se apilen */
+            [data-baseweb="card"] {{
+                margin-bottom: 1rem !important;
+            }}
+        }}
+
+        /* Móviles */
+        @media (max-width: 480px) {{
+            .main .block-container {{
+                padding: 1rem !important;
+                max-width: 100% !important;
+            }}
+            [data-testid="stSidebar"] {{
+                display: none !important;
+            }}
+            .stButton button {{
+                padding: 12px 16px !important;
+                min-height: 44px !important;
+                font-size: 16px !important;
+                width: 100% !important;
+            }}
+            [data-testid="stSlider"] {{
+                min-height: 44px !important;
+            }}
+            .stMetric {{
+                text-align: center !important;
+                padding: 10px !important;
+                margin: 5px 0 !important;
+            }}
+            .stTabs [data-baseweb="tab"] {{
+                padding: 8px 6px !important;
+                font-size: 11px !important;
+                max-width: 70px !important;
+                margin: 0 2px !important;
+            }}
+            /* Reducir espacio en métricas para móviles */
+            [data-baseweb="card"] {{
+                padding: 8px !important;
+                margin: 4px 0 !important;
+            }}
+            /* Imágenes responsive */
+            img {{
+                max-width: 100% !important;
+                height: auto !important;
+            }}
+            /* Gráficos más pequeños */
+            .js-plotly-plot {{
+                height: 250px !important;
+                max-width: 100% !important;
+            }}
+            /* Texto más legible */
+            h1 {{
+                font-size: 1.5rem !important;
+            }}
+            h2 {{
+                font-size: 1.3rem !important;
+            }}
+        }}
+
+        /* Tablets */
+        @media (min-width: 769px) and (max-width: 1024px) {{
+            .main .block-container {{
+                padding: 1rem !important;
+            }}
+            [data-testid="stSidebar"] {{
+                width: 250px !important;
+            }}
+            .js-plotly-plot {{
+                height: 350px !important;
+            }}
+            .stTabs [data-baseweb="tab"] {{
+                max-width: 140px !important;
+            }}
+        }}
+
+        /* Grandes pantallas */
+        @media (min-width: 1440px) {{
+            .stMetric {{
+                padding: 20px !important;
+            }}
         }}
 
         </style>

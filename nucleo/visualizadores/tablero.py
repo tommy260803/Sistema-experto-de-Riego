@@ -215,25 +215,30 @@ class RenderizadorTablero:
             }
         )
 
+        maximum_Z = float(Z.max()) if Z.shape[0] > 0 else 0.0
+
         fig = go.Figure(data=[go.Surface(
-            x=X, y=Y, z=Z,
+            x=X, y=Y, z=Z.tolist(),  # Convertir numpy a list
             colorscale='Viridis',
-            showscale=False
+            showscale=False,
+            cmin=0,  # Asegurar que las escalas comienzan desde 0
+            cmax=min(maximum_Z, 100)  # Limitar max para evitar outliers
         )])
 
-        # Marcar punto actual
-        current_x = inputs.get('temperature', 25)
-        current_y = inputs.get('soil_humidity', 50)
+        # Marcar punto actual solo si hay datos válidos
+        if not np.isnan(maximum_Z) and Z.shape[0] > 0:
+            current_x = inputs.get('temperature', 25)
+            current_y = inputs.get('soil_humidity', 50)
 
-        fig.add_trace(go.Scatter3d(
-            x=[current_x],
-            y=[current_y],
-            z=[Z.max()],
-            mode='markers',
-            marker=dict(size=10, color='red', symbol='diamond'),
-            name='Actual',
-            showlegend=False
-        ))
+            fig.add_trace(go.Scatter3d(
+                x=[current_x],
+                y=[current_y],
+                z=[maximum_Z],
+                mode='markers',
+                marker=dict(size=10, color='red', symbol='diamond'),
+                name='Actual',
+                showlegend=False
+            ))
 
         fig.update_layout(
             scene=dict(
@@ -243,7 +248,8 @@ class RenderizadorTablero:
                 camera=dict(eye=dict(x=1.5, y=1.5, z=1.2))
             ),
             height=300,
-            margin=dict(l=0, r=0, t=0, b=0)
+            margin=dict(l=0, r=0, t=0, b=0),
+            template=self.config.LAYOUT_TEMPLATE
         )
 
         st.plotly_chart(fig, use_container_width=True)
@@ -282,7 +288,7 @@ class RenderizadorTablero:
                 fig.update_layout(
                     xaxis=dict(range=[0, 1]),
                     height=250,
-                    margin=dict(l=0, r=0, t=20, b=0),
+                    margin=dict(l=0, r=0, t=0, b=0),
                     template=self.config.LAYOUT_TEMPLATE
                 )
 
@@ -482,7 +488,7 @@ class RenderizadorTablero:
                 }.get(rec['priority'], '#2C3E50')
 
                 st.markdown(f"""
-                <div style="background-color: {bg_color};
+                <div class="recommendation-card" style="background-color: {bg_color};
                             padding: 15px;
                             border-radius: 8px;
                             margin: 10px 0;

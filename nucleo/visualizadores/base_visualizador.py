@@ -22,7 +22,7 @@ from .superficies import VisualizadorSuperficies
 from .reglas import VisualizadorReglas
 from .plantas import VisualizadorPlantas
 from .sensibilidad import VisualizadorSensibilidad
-from .historico import VisualizadorHistorico
+
 from .tablero import RenderizadorTablero
 
 # Import theme system
@@ -56,7 +56,7 @@ class FuzzyVisualizer:
         self.rule_viz = VisualizadorReglas(self.system, self.config)
         self.plant_viz = VisualizadorPlantas(self.config)
         self.sensitivity_viz = VisualizadorSensibilidad(self.system, self.config)
-        self.history_viz = VisualizadorHistorico(self.config)
+
         self.dashboard_viz = RenderizadorTablero(self.system, self.config)
 
         self._setup_page_config()
@@ -119,9 +119,7 @@ class FuzzyVisualizer:
         """Análisis completo de sensibilidad"""
         self.sensitivity_viz.plot_analysis(base_scenario)
 
-    def plot_historical_analysis(self, df) -> None:
-        """Análisis completo del histórico"""
-        self.history_viz.plot_analysis(df)
+
 
     def render_main_dashboard(self, current_inputs: Dict[str, float], outputs: Dict[str, float]) -> None:
         """Dashboard principal con todas las visualizaciones clave"""
@@ -255,8 +253,53 @@ class FuzzyVisualizer:
 def renderizar_pagina_visualizaciones() -> None:
     """Función principal para renderizar la página de visualizaciones"""
 
-    st.title("📊 Visualizaciones Avanzadas")
-    st.markdown("Sistema de análisis visual completo para control de riego difuso")
+    # Header de página
+    col1, col2 = st.columns([1, 10])
+    with col1:
+        st.write("")  # Spacer
+        st.write("")  # Spacer
+        st.image("assets/images/icon-chart.png", width=100)
+    with col2:
+        st.write("")  # Spacer
+        st.write("")  # Spacer
+        st.title("Visualizaciones del Sistema Difuso")
+        st.write("Explore las representations gráficas del motor de inferencia difusa.")
+
+    # ===================== CONFIGURACIÓN ACTUAL =====================
+
+    # Inicializar valores de la calculadora o por defecto
+    if 'calculadora_current' in st.session_state:
+        config_data = st.session_state.calculadora_current.copy()
+        current_inputs = {k: v for k, v in config_data.items() if k != 'planta'}
+
+        # Obtener factor de ajuste de planta
+        from nucleo.base_conocimientos import PLANT_KB
+        planta = config_data.get('planta', 'Tomate')
+        kb = PLANT_KB.get(planta, {})
+        ajuste_planta = kb.get("factor_ajuste", 1.0)
+
+        st.info("📊 Usando configuración actual de la calculadora de riego inteligente")
+
+        # Mostrar valores actuales
+        col1, col2, col3 = st.columns(3)
+        with col1:
+            st.metric("🌡️ Temperatura", f"{current_inputs['temperature']:.1f}°C")
+            st.metric("💨 Humedad Aire", f"{current_inputs['air_humidity']:.1f}%")
+        with col2:
+            st.metric("🌱 Humedad Suelo", f"{current_inputs['soil_humidity']:.1f}%")
+            st.metric("🌧️ Prob. Lluvia", f"{current_inputs['rain_probability']:.1f}%")
+        with col3:
+            st.metric("🍃 Viento", f"{current_inputs['wind_speed']:.1f} km/h")
+            st.metric("🌱 Planta", config_data.get('planta', 'Tomate'))
+    else:
+        st.warning("⚠️ No hay configuración de la calculadora. Usa primero la Calculadora de Riego Inteligente para configurar variables.")
+        current_inputs = {
+            'temperature': 25.0, 'soil_humidity': 50.0, 'rain_probability': 20.0,
+            'air_humidity': 60.0, 'wind_speed': 15.0
+        }
+        ajuste_planta = 1.0
+
+    st.markdown("---")
 
     # Inicializar sistema
     try:
@@ -277,19 +320,9 @@ def renderizar_pagina_visualizaciones() -> None:
         "📈 Análisis de Sensibilidad"
     ])
 
-    # Inputs por defecto (pueden venir de la página principal)
-    if 'current_inputs' not in st.session_state:
-        st.session_state.current_inputs = {
-            'temperature': 25.0,
-            'soil_humidity': 50.0,
-            'rain_probability': 20.0,
-            'air_humidity': 60.0,
-            'wind_speed': 15.0
-        }
-
     # Calcular outputs
     try:
-        tiempo, freq, _ = system.calculate_irrigation(**st.session_state.current_inputs)
+        tiempo, freq, _ = system.calculate_irrigation(**current_inputs)
         outputs = {'tiempo': tiempo, 'frecuencia': freq}
     except Exception as e:
         st.error(f"Error calculando irrigación: {e}")
@@ -297,7 +330,7 @@ def renderizar_pagina_visualizaciones() -> None:
 
     # Renderizar según tab seleccionado
     with tab_dashboard:
-        visualizer.render_main_dashboard(st.session_state.current_inputs, outputs)
+        visualizer.render_main_dashboard(current_inputs, outputs)
 
     with tab_membership:
         visualizer.plot_membership_functions_enhanced()
@@ -306,13 +339,13 @@ def renderizar_pagina_visualizaciones() -> None:
         visualizer.plot_control_surfaces()
 
     with tab_rules:
-        visualizer.plot_rule_analysis(st.session_state.current_inputs)
+        visualizer.plot_rule_analysis(current_inputs)
 
     with tab_plants:
         visualizer.plot_plant_comparison()
 
     with tab_sensitivity:
-        visualizer.plot_sensitivity_analysis(st.session_state.current_inputs)
+        visualizer.plot_sensitivity_analysis(current_inputs)
 
 
 # ===================== FUNCIONES LEGACY (COMPATIBILIDAD) =========================
@@ -392,9 +425,3 @@ def plot_comparacion_plantas() -> None:
     """Función legacy - mantiene compatibilidad"""
     visualizer = FuzzyVisualizer()
     visualizer.plot_plant_comparison()
-
-
-def plot_historico(df) -> None:
-    """Función legacy - mantiene compatibilidad"""
-    visualizer = FuzzyVisualizer()
-    visualizer.plot_historical_analysis(df)
