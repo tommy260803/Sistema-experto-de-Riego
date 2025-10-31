@@ -1,4 +1,5 @@
 from __future__ import annotations
+import time
 import streamlit as st
 import plotly.graph_objects as go
 from nucleo.motor_difuso import SistemaRiegoDifuso
@@ -19,32 +20,57 @@ def _gauge(title: str, value: float, minv: float, maxv: float, suffix: str = "")
         )
     )
 
-
 def _confidence_gauge(confianza: float):
-    """Gauge de nivel de confianza con colores."""
-    color = "red" if confianza < 0.4 else "yellow" if confianza < 0.7 else "green"
+    """Gauge de nivel de confianza en porcentaje (0..100).
+
+    Espera `confianza` en rango 0..1 y muestra 0..100 con 1 decimal.
+    """
+    pct = float(confianza) * 100.0
+    color = "red" if pct < 40.0 else "yellow" if pct < 70.0 else "green"
     return go.Figure(
         go.Indicator(
             mode="gauge+number",
-            value=confianza,
+            value=pct,
             title={"text": "Confianza"},
             domain={'x': [0, 1], 'y': [0, 1]},
             gauge={
-                'axis': {'range': [0, 1]},
+                'axis': {'range': [0, 100]},
                 'bar': {'color': color},
                 'steps': [
-                    {'range': [0, 0.4], 'color': "lightcoral"},
-                    {'range': [0.4, 0.7], 'color': "lightyellow"},
-                    {'range': [0.7, 1], 'color': "lightgreen"}
+                    {'range': [0, 40], 'color': "lightcoral"},
+                    {'range': [40, 70], 'color': "lightyellow"},
+                    {'range': [70, 100], 'color': "lightgreen"}
                 ],
             },
-            number={'valueformat': '.2f'}
+            number={'valueformat': '.1f', 'suffix': '%'}
         )
     )
 
-
 def render_dashboard() -> None:
     st.title("🌊 Calculadora de Riego Inteligente")
+
+    # Selector de clima integrado en la sección de la calculadora (manual por defecto)
+    try:
+        from components.weather_selector import render_weather_selector
+
+        render_weather_selector()
+
+        # Usar solo Streamlit (Python) para mostrar notificaciones.
+        # Mostrar y limpiar flags para evitar repetición.
+        if st.session_state.get('ws_applied'):
+            st.success("✅ Valores aplicados a los sliders de la Calculadora")
+            st.session_state.pop('ws_applied', None)
+            st.session_state.pop('ws_applied_ts', None)
+
+        if st.session_state.get('ws_updated'):
+            st.info("🔁 Datos actualizados")
+            st.session_state.pop('ws_updated', None)
+            st.session_state.pop('ws_updated_ts', None)
+    except Exception:
+        # No mostramos un mensaje UI cuando el selector falla; solo limpiamos payload temporal
+        st.session_state.pop('ws_last_payload', None)
+        st.session_state.pop('ws_last_dept', None)
+        st.session_state.pop('ws_last_latlon', None)
 
     with st.expander("¿Qué es Lógica Difusa?", expanded=False):
         st.write(
@@ -52,17 +78,68 @@ def render_dashboard() -> None:
             "Este sistema usa inferencia de Mamdani y centroide para decidir tiempo y frecuencia de riego."
         )
 
+    # Valores por defecto desde session_state['weather_inputs'] si están presentes
+    ws = st.session_state.get('weather_inputs', {})
+    defaults = {
+        'temperature': 25.0,
+        'soil_humidity': 30.0,
+        'rain_probability': 10.0,
+        'air_humidity': 40.0,
+        'wind_speed': 8.0,
+    }
+    defaults.update({
+        'temperature': ws.get('temperature', defaults['temperature']),
+        'soil_humidity': ws.get('soil_humidity', defaults['soil_humidity']),
+        'rain_probability': ws.get('rain_probability', defaults['rain_probability']),
+        'air_humidity': ws.get('air_humidity', defaults['air_humidity']),
+        'wind_speed': ws.get('wind_speed', defaults['wind_speed']),
+    })
+
+    # Inicializar session_state SOLO si no existen las keys (evita el warning de Streamlit)
+    if 'calc_temp' not in st.session_state:
+        st.session_state['calc_temp'] = defaults['temperature']
+    if 'calc_soil' not in st.session_state:
+        st.session_state['calc_soil'] = defaults['soil_humidity']
+    if 'calc_rain' not in st.session_state:
+        st.session_state['calc_rain'] = defaults['rain_probability']
+    if 'calc_hum' not in st.session_state:
+        st.session_state['calc_hum'] = defaults['air_humidity']
+    if 'calc_wind' not in st.session_state:
+        st.session_state['calc_wind'] = defaults['wind_speed']
+
     cols = st.columns(3)
     with cols[0]:
-        temperatura = st.slider("Temperatura (°C)", 0.0, 45.0, 25.0, help="0-45°C")
-        humedad_suelo = st.slider("Humedad del Suelo (%)", 0.0, 100.0, 30.0)
+        temperatura = st.slider(
+            "Temperatura (°C)", 0.0, 45.0,
+            help="0-45°C",
+            key="calc_temp",
+        )
+        humedad_suelo = st.slider(
+            "Humedad del Suelo (%)", 0.0, 100.0,
+            key="calc_soil",
+        )
     with cols[1]:
-        prob_lluvia = st.slider("Probabilidad de Lluvia (%)", 0.0, 100.0, 10.0)
-        humedad_ambiental = st.slider("Humedad Ambiental (%)", 0.0, 100.0, 40.0)
+        prob_lluvia = st.slider(
+            "Probabilidad de Lluvia (%)", 0.0, 100.0,
+            key="calc_rain",
+        )
+        humedad_ambiental = st.slider(
+            "Humedad Ambiental (%)", 0.0, 100.0,
+            key="calc_hum",
+        )
     with cols[2]:
-        viento = st.slider("Velocidad del Viento (km/h)", 0.0, 50.0, 8.0)
-        planta = st.selectbox("Tipo de planta", PLANTS, index=0)
-        auto = st.toggle("Simulación Automática", value=False)
+        viento = st.slider(
+            "Velocidad del Viento (km/h)", 0.0, 50.0,
+            key="calc_wind",
+        )
+        # Si hay recomendaciones de planta por departamento, mostrarlas primero
+        rec = st.session_state.get('dept_recommended_plants')
+        if rec:
+            st.caption(f"Recomendados para {st.session_state.get('ws_department_main', '')}: {', '.join(rec)}")
+            planta = st.selectbox("Tipo de planta", rec, index=0, key="calc_plant")
+        else:
+            planta = st.selectbox("Tipo de planta", PLANTS, index=0, key="calc_plant")
+        auto = st.checkbox("Simulación Automática", value=False, key="calc_auto")
 
     kb = PLANT_KB.get(planta, {})
     ajuste = float(kb.get("factor_ajuste", 1.0))
@@ -93,11 +170,43 @@ def render_dashboard() -> None:
             st.info("💡 Verifica que todos los valores estén en los rangos correctos.")
             return
 
-        # Calcular confianza aproximada basada en la dispersión de activaciones
-        confianza = min(1.0, sum(act.values()) / len(act)) if act else 0.8
+        # Calcular confianza usando método peak-weighted (da más peso al pico de activación)
+        def peak_weighted_confidence(activations: dict, w_max: float = 0.7, alpha: float = 0.85) -> float:
+            """
+            Calcula confianza basada en activaciones de reglas fuzzy.
+            - w_max: peso para el máximo (default 0.7 = 70% peso al pico)
+            - alpha: exponente que controla penalización (< 1 = menos estricto)
+            
+            Valores típicos de confianza:
+            - >0.65: Alta confianza (condiciones claras)
+            - 0.45-0.65: Confianza media (condiciones normales)
+            - <0.45: Baja confianza (condiciones ambiguas)
+            """
+            if not activations:
+                return 0.75  # Default alto si no hay datos
+            
+            vals = list(activations.values())
+            if not vals:
+                return 0.75
+            
+            max_a = max(vals)
+            mean_a = sum(vals) / len(vals)
+            
+            # Fórmula ajustada: más tolerante con activaciones moderadas
+            # El alpha < 1 hace que valores medios (0.4-0.6) no se penalicen tanto
+            conf = w_max * (max_a ** alpha) + (1.0 - w_max) * (mean_a ** alpha)
+            
+            # Boost adicional si hay múltiples reglas con activación razonable (>0.3)
+            strong_rules = sum(1 for v in vals if v > 0.3)
+            if strong_rules >= 3:
+                conf = min(1.0, conf * 1.15)  # Bonus del 15% si hay consenso
+            
+            return min(1.0, float(conf))
 
-        # Mostrar alerta de confianza baja
-        if confianza < 0.5:
+        confianza = peak_weighted_confidence(act, w_max=0.7, alpha=0.85)
+
+        # Mostrar alerta solo si la confianza es REALMENTE baja
+        if confianza < 0.45:
             st.warning(
                 "⚠️ **Confianza Baja** - Las condiciones ambientales son ambiguas. "
                 "Considera verificar manualmente o ajustar parámetros."
@@ -110,6 +219,7 @@ def render_dashboard() -> None:
         with c2:
             st.plotly_chart(_gauge("Frecuencia Diaria", f, 0, 4, " x"), use_container_width=True)
         with c3:
+            # Mostrar confianza como porcentaje con 1 decimal (ej. 81.0%)
             st.plotly_chart(_confidence_gauge(confianza), use_container_width=True)
         with c4:
             # Estado y consejos

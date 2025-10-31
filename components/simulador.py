@@ -88,13 +88,30 @@ def render_simulator() -> None:
             st.markdown("**O configurar manualmente**")
             use_custom = st.checkbox("Usar configuración personalizada", value=False, key="custom_scenario")
 
+            # Valores por defecto desde session_state['weather_inputs'] si existen
+            ws = st.session_state.get('weather_inputs', {})
+            defaults = {
+                'temperature': 25,
+                'soil_humidity': 50,
+                'rain_probability': 20,
+                'air_humidity': 60,
+                'wind_speed': 15,
+            }
+            defaults.update({
+                'temperature': ws.get('temperature', defaults['temperature']),
+                'soil_humidity': ws.get('soil_humidity', defaults['soil_humidity']),
+                'rain_probability': ws.get('rain_probability', defaults['rain_probability']),
+                'air_humidity': ws.get('air_humidity', defaults['air_humidity']),
+                'wind_speed': ws.get('wind_speed', defaults['wind_speed']),
+            })
+
             if use_custom:
-                temp_custom = st.slider("Temperatura (°C)", 0, 45, 25, key="temp_custom")
-                hum_suelo_custom = st.slider("Humedad Suelo (%)", 0, 100, 50, key="hum_suelo_custom")
-                prob_lluvia_custom = st.slider("Prob. Lluvia (%)", 0, 100, 20, key="lluvia_custom")
-                hum_aire_custom = st.slider("Humedad Aire (%)", 0, 100, 60, key="hum_aire_custom")
-                viento_custom = st.slider("Velocidad Viento (km/h)", 0, 50, 15, key="viento_custom")
-                planta_custom = st.selectbox("Planta", PLANTS, index=0, key="planta_custom")
+                temp_custom = st.slider("Temperatura (°C)", 0, 45, int(defaults['temperature']), key="sim_temp_custom")
+                hum_suelo_custom = st.slider("Humedad Suelo (%)", 0, 100, int(defaults['soil_humidity']), key="sim_hum_suelo_custom")
+                prob_lluvia_custom = st.slider("Prob. Lluvia (%)", 0, 100, int(defaults['rain_probability']), key="sim_lluvia_custom")
+                hum_aire_custom = st.slider("Humedad Aire (%)", 0, 100, int(defaults['air_humidity']), key="sim_hum_aire_custom")
+                viento_custom = st.slider("Velocidad Viento (km/h)", 0, 50, int(defaults['wind_speed']), key="sim_viento_custom")
+                planta_custom = st.selectbox("Planta", PLANTS, index=0, key="sim_planta_custom")
 
                 escenario_actual = {
                     "temperatura": temp_custom,

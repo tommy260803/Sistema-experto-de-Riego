@@ -32,6 +32,7 @@ with st.sidebar:
 
     # Componente de cambio de tema
     current_theme = ThemeToggle.render_theme_toggle()
+    # (El selector de clima se muestra dentro de la Calculadora, no en la barra lateral.)
 
     # Logo
     col1, col2 = st.columns([1, 4])

@@ -58,3 +58,15 @@
 {"ts": 1761841480, "temperatura": 25.0, "humedad_suelo": 30.0, "prob_lluvia": 10.0, "humedad_ambiental": 40.0, "viento": 8.0, "planta": "Tomate", "tiempo_min": 27.5, "frecuencia": 2.01, "confianza": 0.11}
 {"ts": 1761843209, "temperatura": 25.0, "humedad_suelo": 30.0, "prob_lluvia": 10.0, "humedad_ambiental": 40.0, "viento": 8.0, "planta": "Tomate", "tiempo_min": 27.5, "frecuencia": 2.01, "confianza": 0.11}
 {"ts": 1761843216, "temperatura": 45.0, "humedad_suelo": 92.15, "prob_lluvia": 64.28, "humedad_ambiental": 58.44, "viento": 21.65, "planta": "Tomate", "tiempo_min": 9.71, "frecuencia": 2.53, "confianza": 0.13}
+{"ts": 1761858434, "temperatura": 17.0, "humedad_suelo": 62.3, "prob_lluvia": 10.0, "humedad_ambiental": 81.0, "viento": 11.9, "planta": "Zanahoria", "tiempo_min": 10.93, "frecuencia": 1.6, "confianza": 0.45}
+{"ts": 1761859568, "temperatura": 27.6, "humedad_suelo": 66.9, "prob_lluvia": 13.0, "humedad_ambiental": 96.0, "viento": 1.8, "planta": "Tomate", "tiempo_min": 11.5, "frecuencia": 1.66, "confianza": 0.82}
+{"ts": 1761859675, "temperatura": 25.0, "humedad_suelo": 30.0, "prob_lluvia": 10.0, "humedad_ambiental": 40.0, "viento": 8.0, "planta": "Tomate", "tiempo_min": 27.5, "frecuencia": 2.01, "confianza": 0.81}
+{"ts": 1761859888, "temperatura": 25.0, "humedad_suelo": 30.0, "prob_lluvia": 10.0, "humedad_ambiental": 40.0, "viento": 8.0, "planta": "Tomate", "tiempo_min": 27.5, "frecuencia": 2.01, "confianza": 0.81}
+{"ts": 1761859910, "temperatura": 25.0, "humedad_suelo": 30.0, "prob_lluvia": 10.0, "humedad_ambiental": 40.0, "viento": 8.0, "planta": "Tomate", "tiempo_min": 27.5, "frecuencia": 2.01, "confianza": 0.81}
+{"ts": 1761859914, "temperatura": 25.0, "humedad_suelo": 30.0, "prob_lluvia": 10.0, "humedad_ambiental": 40.0, "viento": 8.0, "planta": "Tomate", "tiempo_min": 27.5, "frecuencia": 2.01, "confianza": 0.81}
+{"ts": 1761874301, "temperatura": 16.4, "humedad_suelo": 62.9, "prob_lluvia": 0.0, "humedad_ambiental": 94.0, "viento": 12.3, "planta": "Fresa", "tiempo_min": 11.5, "frecuencia": 1.58, "confianza": 0.48}
+{"ts": 1761874319, "temperatura": 16.5, "humedad_suelo": 62.9, "prob_lluvia": 0.0, "humedad_ambiental": 94.0, "viento": 11.8, "planta": "Fresa", "tiempo_min": 11.5, "frecuencia": 1.62, "confianza": 0.48}
+{"ts": 1761874468, "temperatura": 16.5, "humedad_suelo": 62.9, "prob_lluvia": 0.0, "humedad_ambiental": 94.0, "viento": 11.8, "planta": "Tomate", "tiempo_min": 11.5, "frecuencia": 1.62, "confianza": 0.59}
+{"ts": 1761874476, "temperatura": 16.5, "humedad_suelo": 62.9, "prob_lluvia": 0.0, "humedad_ambiental": 94.0, "viento": 11.8, "planta": "Fresa", "tiempo_min": 11.5, "frecuencia": 1.62, "confianza": 0.59}
+{"ts": 1761874657, "temperatura": 16.5, "humedad_suelo": 62.9, "prob_lluvia": 0.0, "humedad_ambiental": 94.0, "viento": 11.8, "planta": "Fresa", "tiempo_min": 11.5, "frecuencia": 1.62, "confianza": 0.59}
+{"ts": 1761881264, "temperatura": 16.4, "humedad_suelo": 62.9, "prob_lluvia": 0.0, "humedad_ambiental": 94.0, "viento": 8.1, "planta": "Tomate", "tiempo_min": 11.5, "frecuencia": 1.66, "confianza": 0.84}

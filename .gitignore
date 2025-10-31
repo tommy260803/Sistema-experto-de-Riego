@@ -1,1 +1,24 @@
-__pycache__/\n*.pyc\n*.pyo\n*.DS_Store\n.env\n.venv\n.vscode/\n.idea/\n.streamlit/\nnode_modules/\n*.log\n*.pdf\n\n# Streamlit cache\n**/.streamlit/**\n**/.cache/**\n\n# Data outputs\ndata/history.csv\ndata/history.jsonl\n
+__pycache__/
+*.pyc
+*.pyo
+*.DS_Store
+.env
+.venv
+venv/
+env/
+.vscode/
+.idea/
+.streamlit/
+node_modules/
+*.log
+*.pdf
+
+# Streamlit cache
+**/.streamlit/**
+**/.cache/**
+
+# Data outputs
+data/history.csv
+data/history.jsonl
+data/export_history.csv
+

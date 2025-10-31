@@ -136,3 +136,39 @@
 2025-10-30 11:53:36,327 - INFO - Irrigation calculation initiated for plant Tomate with inputs: temp=45.0, soil_humidity=92.15, rain_prob=64.28, air_humidity=58.44, wind=21.65
 2025-10-30 11:53:36,332 - INFO - Irrigation decision for Tomate: time=9.71 min, frequency=2.53 x/day
 2025-10-30 11:53:36,339 - INFO - Saving history record for plant Tomate: time=9.71, frequency=2.53
+2025-10-30 16:07:14,279 - INFO - Irrigation calculation initiated for plant Zanahoria with inputs: temp=17.0, soil_humidity=62.3, rain_prob=10.0, air_humidity=81.0, wind=11.9
+2025-10-30 16:07:14,304 - INFO - Irrigation decision for Zanahoria: time=10.93 min, frequency=1.60 x/day
+2025-10-30 16:07:14,430 - INFO - Saving history record for plant Zanahoria: time=10.93, frequency=1.6
+2025-10-30 16:26:08,112 - INFO - Irrigation calculation initiated for plant Tomate with inputs: temp=27.6, soil_humidity=66.9, rain_prob=13.0, air_humidity=96.0, wind=1.8
+2025-10-30 16:26:08,131 - INFO - Irrigation decision for Tomate: time=11.50 min, frequency=1.66 x/day
+2025-10-30 16:26:08,147 - INFO - Saving history record for plant Tomate: time=11.5, frequency=1.66
+2025-10-30 16:27:55,879 - INFO - Irrigation calculation initiated for plant Tomate with inputs: temp=25.0, soil_humidity=30.0, rain_prob=10.0, air_humidity=40.0, wind=8.0
+2025-10-30 16:27:55,884 - INFO - Irrigation decision for Tomate: time=27.50 min, frequency=2.01 x/day
+2025-10-30 16:27:55,895 - INFO - Saving history record for plant Tomate: time=27.5, frequency=2.01
+2025-10-30 16:31:28,047 - INFO - Irrigation calculation initiated for plant Tomate with inputs: temp=25.0, soil_humidity=30.0, rain_prob=10.0, air_humidity=40.0, wind=8.0
+2025-10-30 16:31:28,048 - INFO - Irrigation decision for Tomate: time=27.50 min, frequency=2.01 x/day
+2025-10-30 16:31:28,062 - INFO - Saving history record for plant Tomate: time=27.5, frequency=2.01
+2025-10-30 16:31:50,235 - INFO - Irrigation calculation initiated for plant Tomate with inputs: temp=25.0, soil_humidity=30.0, rain_prob=10.0, air_humidity=40.0, wind=8.0
+2025-10-30 16:31:50,236 - INFO - Irrigation decision for Tomate: time=27.50 min, frequency=2.01 x/day
+2025-10-30 16:31:50,247 - INFO - Saving history record for plant Tomate: time=27.5, frequency=2.01
+2025-10-30 16:31:54,687 - INFO - Irrigation calculation initiated for plant Tomate with inputs: temp=25.0, soil_humidity=30.0, rain_prob=10.0, air_humidity=40.0, wind=8.0
+2025-10-30 16:31:54,690 - INFO - Irrigation decision for Tomate: time=27.50 min, frequency=2.01 x/day
+2025-10-30 16:31:54,702 - INFO - Saving history record for plant Tomate: time=27.5, frequency=2.01
+2025-10-30 20:31:41,635 - INFO - Irrigation calculation initiated for plant Fresa with inputs: temp=16.4, soil_humidity=62.9, rain_prob=0.0, air_humidity=94.0, wind=12.3
+2025-10-30 20:31:41,725 - INFO - Irrigation decision for Fresa: time=11.50 min, frequency=1.58 x/day
+2025-10-30 20:31:41,968 - INFO - Saving history record for plant Fresa: time=11.5, frequency=1.58
+2025-10-30 20:31:59,524 - INFO - Irrigation calculation initiated for plant Fresa with inputs: temp=16.5, soil_humidity=62.9, rain_prob=0.0, air_humidity=94.0, wind=11.8
+2025-10-30 20:31:59,534 - INFO - Irrigation decision for Fresa: time=11.50 min, frequency=1.62 x/day
+2025-10-30 20:31:59,561 - INFO - Saving history record for plant Fresa: time=11.5, frequency=1.62
+2025-10-30 20:34:28,660 - INFO - Irrigation calculation initiated for plant Tomate with inputs: temp=16.5, soil_humidity=62.9, rain_prob=0.0, air_humidity=94.0, wind=11.8
+2025-10-30 20:34:28,711 - INFO - Irrigation decision for Tomate: time=11.50 min, frequency=1.62 x/day
+2025-10-30 20:34:28,743 - INFO - Saving history record for plant Tomate: time=11.5, frequency=1.62
+2025-10-30 20:34:36,025 - INFO - Irrigation calculation initiated for plant Fresa with inputs: temp=16.5, soil_humidity=62.9, rain_prob=0.0, air_humidity=94.0, wind=11.8
+2025-10-30 20:34:36,030 - INFO - Irrigation decision for Fresa: time=11.50 min, frequency=1.62 x/day
+2025-10-30 20:34:36,060 - INFO - Saving history record for plant Fresa: time=11.5, frequency=1.62
+2025-10-30 20:37:37,343 - INFO - Irrigation calculation initiated for plant Fresa with inputs: temp=16.5, soil_humidity=62.9, rain_prob=0.0, air_humidity=94.0, wind=11.8
+2025-10-30 20:37:37,345 - INFO - Irrigation decision for Fresa: time=11.50 min, frequency=1.62 x/day
+2025-10-30 20:37:37,368 - INFO - Saving history record for plant Fresa: time=11.5, frequency=1.62
+2025-10-30 22:27:44,398 - INFO - Irrigation calculation initiated for plant Tomate with inputs: temp=16.4, soil_humidity=62.9, rain_prob=0.0, air_humidity=94.0, wind=8.1
+2025-10-30 22:27:44,413 - INFO - Irrigation decision for Tomate: time=11.50 min, frequency=1.66 x/day
+2025-10-30 22:27:44,443 - INFO - Saving history record for plant Tomate: time=11.5, frequency=1.66
