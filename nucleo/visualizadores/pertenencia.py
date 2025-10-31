@@ -20,6 +20,8 @@ from ..motor_difuso import (
     RAIN_UNIVERSE,
     AIRH_UNIVERSE,
     WIND_UNIVERSE,
+    TIME_UNIVERSE,
+    FREQ_UNIVERSE,
     SistemaRiegoDifuso,
 )
 
@@ -38,7 +40,7 @@ class VisualizadorPertenencia:
 
         view_mode = st.radio(
             "Modo de visualización",
-            ["Individual Interactivo", "Grid Completo"],
+            ["Individual Interactivo", "Grid Completo", "Salidas del Sistema"],
             horizontal=True,
             key="membership_view_mode"
         )
@@ -47,6 +49,8 @@ class VisualizadorPertenencia:
             self._plot_interactive()
         elif view_mode == "Grid Completo":
             self._plot_grid()
+        elif view_mode == "Salidas del Sistema":
+            self._plot_output_functions()
 
     def _plot_interactive(self) -> None:
         """Modo interactivo con simulación en vivo"""
@@ -197,19 +201,23 @@ class VisualizadorPertenencia:
                         y=1.02,
                         xanchor="right",
                         x=1,
-                        font=dict(size=12, family='Arial')
+                        font=dict(size=12, family='Arial', color='black')
                     ),
-                    font=dict(family='Arial', size=12),
+                    font=dict(family='Arial', size=12, color='black'),
                     xaxis=dict(
                         gridcolor='#EAEAEA',
                         linecolor='#2D3436',
-                        linewidth=2
+                        linewidth=2,
+                        title_font=dict(color='black'),
+                        tickfont=dict(color='black')
                     ),
                     yaxis=dict(
                         gridcolor='#EAEAEA',
                         linecolor='#2D3436',
                         linewidth=2,
-                        range=[0, 1.1]
+                        range=[0, 1.1],
+                        title_font=dict(color='black'),
+                        tickfont=dict(color='black')
                     )
                 )
 
@@ -229,7 +237,7 @@ class VisualizadorPertenencia:
                         st.markdown(f"""
                         <div style="background-color: {bg_color}; padding: 10px; border-radius: 5px; border-left: 4px solid {text_color};">
                             <strong style="color: {text_color};">{label.capitalize()}</strong><br>
-                            <span style="font-size: 18px; font-weight: bold; color: {text_color};">{value:.3f}</span><br>
+                            <span style="font-size: 18px; font-weight: bold; color: black !important;">{value:.3f}</span><br>
                             <small style="color: {text_color};">{status}</small>
                         </div>
                         """, unsafe_allow_html=True)
@@ -276,7 +284,7 @@ class VisualizadorPertenencia:
                             ))
 
                         fig.update_layout(
-                            title=f"{icon} {title}",
+                            title=dict(text=f"{icon} {title}", font=dict(color='black', size=12, family='Arial')),
                             xaxis_title="Valor",
                             yaxis_title="μ",
                             template='plotly_white',
@@ -289,10 +297,19 @@ class VisualizadorPertenencia:
                                 yanchor="bottom",
                                 y=-0.2,
                                 xanchor="center",
-                                x=0.5
+                                x=0.5,
+                                font=dict(color='black')
                             ),
                             margin=dict(l=40, r=40, t=60, b=60),
-                            font=dict(size=10, family='Arial')
+                            font=dict(size=10, family='Arial', color='black'),
+                            xaxis=dict(
+                                title_font=dict(color='black'),
+                                tickfont=dict(color='black')
+                            ),
+                            yaxis=dict(
+                                title_font=dict(color='black'),
+                                tickfont=dict(color='black')
+                            )
                         )
 
                         st.plotly_chart(fig, use_container_width=True)
@@ -300,6 +317,128 @@ class VisualizadorPertenencia:
                 except Exception as e:
                     with cols[j]:
                         st.error(f"Error en {title}: {str(e)[:50]}...")
+
+    def _plot_output_functions(self) -> None:
+        """Visualización de las funciones de membresía de las salidas del sistema"""
+
+        st.markdown("#### 📈 Funciones de Membresía - Salidas del Sistema")
+
+        # Primera fila: Tiempo de riego
+        st.markdown("##### ⏱️ Tiempo de Riego (0-60 minutos)")
+        fig_time = go.Figure()
+
+        colors_time = ['#FF6B6B', '#FFD93D', '#6BCF7F', '#FF8C42']  # nulo, corto, medio, largo
+        labels_time = ['nulo', 'corto', 'medio', 'largo']
+
+        for i, label in enumerate(labels_time):
+            color = colors_time[i % len(colors_time)]
+            fig_time.add_trace(go.Scatter(
+                x=TIME_UNIVERSE,
+                y=self.system.tiempo[label].mf,
+                name=label.capitalize(),
+                mode='lines',
+                line=dict(width=3, color=color),
+                hovertemplate=f'<b>{label.capitalize()}</b><br>Tiempo: %{{x:.1f}} min<br>Membresía: %{{y:.3f}}<extra></extra>'
+            ))
+
+        fig_time.update_layout(
+            title=dict(text="Funciones de Membresía del Tiempo de Riego", font=dict(color='black', size=14, family='Arial')),
+            xaxis_title="Tiempo (minutos)",
+            yaxis_title="Grado de Membresía (μ)",
+            template='plotly_white',
+            height=350,
+            showlegend=True,
+            plot_bgcolor='white',
+            paper_bgcolor='white',
+            legend=dict(
+                orientation="h",
+                yanchor="bottom",
+                y=-0.2,
+                xanchor="center",
+                x=0.5,
+                font=dict(color='black')
+            ),
+            font=dict(size=10, family='Arial', color='black'),
+            xaxis=dict(
+                title_font=dict(color='black'),
+                tickfont=dict(color='black')
+            ),
+            yaxis=dict(
+                title_font=dict(color='black'),
+                tickfont=dict(color='black')
+            )
+        )
+
+        st.plotly_chart(fig_time, use_container_width=True)
+
+        # Segunda fila: Frecuencia de riego
+        st.markdown("##### 🔄 Frecuencia de Riego (0.5-4 veces/día)")
+        fig_freq = go.Figure()
+
+        colors_freq = ['#FF6B6B', '#FFD93D', '#6BCF7F']  # baja, media, alta
+        labels_freq = ['baja', 'media', 'alta']
+
+        for i, label in enumerate(labels_freq):
+            color = colors_freq[i % len(colors_freq)]
+            fig_freq.add_trace(go.Scatter(
+                x=FREQ_UNIVERSE,
+                y=self.system.frecuencia[label].mf,
+                name=label.capitalize(),
+                mode='lines',
+                line=dict(width=3, color=color),
+                hovertemplate=f'<b>{label.capitalize()}</b><br>Frecuencia: %{{x:.1f}} riegos/día<br>Membresía: %{{y:.3f}}<extra></extra>'
+            ))
+
+        fig_freq.update_layout(
+            title=dict(text="Funciones de Membresía de la Frecuencia de Riego", font=dict(color='black', size=14, family='Arial')),
+            xaxis_title="Frecuencia (riegos por día)",
+            yaxis_title="Grado de Membresía (μ)",
+            template='plotly_white',
+            height=350,
+            showlegend=True,
+            plot_bgcolor='white',
+            paper_bgcolor='white',
+            legend=dict(
+                orientation="h",
+                yanchor="bottom",
+                y=-0.2,
+                xanchor="center",
+                x=0.5,
+                font=dict(color='black')
+            ),
+            font=dict(size=10, family='Arial', color='black'),
+            xaxis=dict(
+                title_font=dict(color='black'),
+                tickfont=dict(color='black')
+            ),
+            yaxis=dict(
+                title_font=dict(color='black'),
+                tickfont=dict(color='black')
+            )
+        )
+
+        st.plotly_chart(fig_freq, use_container_width=True)
+
+        # Tabla de resumen
+        st.markdown("**Definiciones de los conjuntos difusos de salida:**")
+        col1, col2 = st.columns(2)
+
+        with col1:
+            st.markdown("""
+            **Tiempo de Riego:**
+            - **Nulo**: 0-5 minutos (prácticamente sin riego)
+            - **Corto**: 3-20 minutos (riego ligero)
+            - **Medio**: 15-40 minutos (riego moderado)
+            - **Largo**: 35-60 minutos (riego intensivo)
+            """)
+
+        with col2:
+            st.markdown("""
+            **Frecuencia de Riego:**
+            - **Baja**: 0.5-1.5 riegos/día (riego espaciado)
+            - **Media**: 1.0-2.5 riegos/día (riego regular)
+            - **Alta**: 2.0-4.0 riegos/día (riego frecuente)
+            """)
 
     def _get_label_color(self, label: str) -> str:
         """Retorna color según etiqueta con fallback seguro"""
