@@ -1,155 +1,5 @@
 [
   {
-    "temperatura": 19.4,
-    "humedad_suelo": 17.25,
-    "prob_lluvia": 14.76,
-    "humedad_ambiente": 16.75,
-    "velocidad_viento": 8.29,
-    "planta": "Lechuga",
-    "tiempo_min": 44.09,
-    "frecuencia": 2.88
-  },
-  {
-    "temperatura": 19.4,
-    "humedad_suelo": 17.25,
-    "prob_lluvia": 14.76,
-    "humedad_ambiente": 16.75,
-    "velocidad_viento": 8.29,
-    "planta": "Lechuga",
-    "tiempo_min": 44.09,
-    "frecuencia": 2.88
-  },
-  {
-    "temperatura": 19.4,
-    "humedad_suelo": 17.25,
-    "prob_lluvia": 14.76,
-    "humedad_ambiente": 16.75,
-    "velocidad_viento": 8.29,
-    "planta": "Zanahoria",
-    "tiempo_min": 49.12,
-    "frecuencia": 2.93
-  },
-  {
-    "temperatura": 19.4,
-    "humedad_suelo": 17.25,
-    "prob_lluvia": 14.76,
-    "humedad_ambiente": 16.75,
-    "velocidad_viento": 8.29,
-    "planta": "Zanahoria",
-    "tiempo_min": 49.12,
-    "frecuencia": 2.93
-  },
-  {
-    "temperatura": 19.4,
-    "humedad_suelo": 17.25,
-    "prob_lluvia": 14.76,
-    "humedad_ambiente": 16.75,
-    "velocidad_viento": 8.29,
-    "planta": "Zanahoria",
-    "tiempo_min": 49.12,
-    "frecuencia": 2.93
-  },
-  {
-    "temperatura": 19.4,
-    "humedad_suelo": 17.25,
-    "prob_lluvia": 14.76,
-    "humedad_ambiente": 16.75,
-    "velocidad_viento": 8.29,
-    "planta": "Zanahoria",
-    "tiempo_min": 49.12,
-    "frecuencia": 2.93
-  },
-  {
-    "temperatura": 19.4,
-    "humedad_suelo": 17.25,
-    "prob_lluvia": 14.76,
-    "humedad_ambiente": 16.75,
-    "velocidad_viento": 8.29,
-    "planta": "Zanahoria",
-    "tiempo_min": 49.12,
-    "frecuencia": 2.93
-  },
-  {
-    "temperatura": 25.0,
-    "humedad_suelo": 30.0,
-    "prob_lluvia": 10.0,
-    "humedad_ambiente": 40.0,
-    "velocidad_viento": 8.0,
-    "planta": "Tomate",
-    "tiempo_min": 30.25,
-    "frecuencia": 2.1
-  },
-  {
-    "temperatura": 25.0,
-    "humedad_suelo": 30.0,
-    "prob_lluvia": 10.0,
-    "humedad_ambiente": 40.0,
-    "velocidad_viento": 8.0,
-    "planta": "Tomate",
-    "tiempo_min": 30.25,
-    "frecuencia": 2.1
-  },
-  {
-    "temperatura": 25.0,
-    "humedad_suelo": 30.0,
-    "prob_lluvia": 10.0,
-    "humedad_ambiente": 40.0,
-    "velocidad_viento": 8.0,
-    "planta": "Tomate",
-    "tiempo_min": 30.25,
-    "frecuencia": 2.1
-  },
-  {
-    "temperatura": 25.0,
-    "humedad_suelo": 30.0,
-    "prob_lluvia": 10.0,
-    "humedad_ambiente": 40.0,
-    "velocidad_viento": 8.0,
-    "planta": "Tomate",
-    "tiempo_min": 30.25,
-    "frecuencia": 2.1
-  },
-  {
-    "temperatura": 25.0,
-    "humedad_suelo": 30.0,
-    "prob_lluvia": 10.0,
-    "humedad_ambiente": 40.0,
-    "velocidad_viento": 8.0,
-    "planta": "Tomate",
-    "tiempo_min": 30.25,
-    "frecuencia": 2.1
-  },
-  {
-    "temperatura": 25.0,
-    "humedad_suelo": 30.0,
-    "prob_lluvia": 10.0,
-    "humedad_ambiente": 40.0,
-    "velocidad_viento": 8.0,
-    "planta": "Tomate",
-    "tiempo_min": 30.25,
-    "frecuencia": 2.1
-  },
-  {
-    "temperatura": 25.0,
-    "humedad_suelo": 30.0,
-    "prob_lluvia": 10.0,
-    "humedad_ambiente": 40.0,
-    "velocidad_viento": 8.0,
-    "planta": "Tomate",
-    "tiempo_min": 30.25,
-    "frecuencia": 2.1
-  },
-  {
-    "temperatura": 25.0,
-    "humedad_suelo": 30.0,
-    "prob_lluvia": 10.0,
-    "humedad_ambiente": 40.0,
-    "velocidad_viento": 8.0,
-    "planta": "Tomate",
-    "tiempo_min": 30.25,
-    "frecuencia": 2.1
-  },
-  {
     "temperatura": 25.0,
     "humedad_suelo": 30.0,
     "prob_lluvia": 10.0,
@@ -728,5 +578,425 @@
     "planta": "Papa",
     "tiempo_min": 8.36,
     "frecuencia": 2.15
+  },
+  {
+    "temperatura": 25.0,
+    "humedad_suelo": 60.0,
+    "prob_lluvia": 30.0,
+    "humedad_ambiente": 50.0,
+    "velocidad_viento": 10.0,
+    "planta": "Tomate",
+    "tiempo_min": 22.15,
+    "frecuencia": 1.74
+  },
+  {
+    "temperatura": 25.0,
+    "humedad_suelo": 60.0,
+    "prob_lluvia": 30.0,
+    "humedad_ambiente": 50.0,
+    "velocidad_viento": 10.0,
+    "planta": "Tomate",
+    "tiempo_min": 22.15,
+    "frecuencia": 1.74
+  },
+  {
+    "temperatura": 28,
+    "humedad_suelo": 35,
+    "prob_lluvia": 15,
+    "humedad_ambiente": 45,
+    "velocidad_viento": 18,
+    "planta": "Tomate",
+    "tiempo_min": 30.25,
+    "frecuencia": 3.11
+  },
+  {
+    "temperatura": 28,
+    "humedad_suelo": 35,
+    "prob_lluvia": 15,
+    "humedad_ambiente": 45,
+    "velocidad_viento": 18,
+    "planta": "Tomate",
+    "tiempo_min": 30.25,
+    "frecuencia": 3.11
+  },
+  {
+    "temperature": 28.5,
+    "soil_humidity": 35.2,
+    "rain_probability": 15.8,
+    "air_humidity": 52.1,
+    "wind_speed": 12.3,
+    "planta": "Tomate",
+    "tiempo_min": 30.25,
+    "frecuencia": 2.77
+  },
+  {
+    "temperature": 25.0,
+    "soil_humidity": 50.0,
+    "rain_probability": 20.0,
+    "air_humidity": 60.0,
+    "wind_speed": 10.0,
+    "planta": "Tomate",
+    "tiempo_min": 30.25,
+    "frecuencia": 2.01
+  },
+  {
+    "temperature": 35.0,
+    "soil_humidity": 15.0,
+    "rain_probability": 5.0,
+    "air_humidity": 25.0,
+    "wind_speed": 20.0,
+    "planta": "Tomate",
+    "tiempo_min": 54.77,
+    "frecuencia": 3.45
+  },
+  {
+    "temperatura": 26,
+    "humedad_suelo": 40,
+    "prob_lluvia": 20,
+    "humedad_ambiente": 50,
+    "velocidad_viento": 12,
+    "planta": "Tomate",
+    "tiempo_min": 30.25,
+    "frecuencia": 2.53
+  },
+  {
+    "temperatura": 24,
+    "humedad_suelo": 55,
+    "prob_lluvia": 30,
+    "humedad_ambiente": 60,
+    "velocidad_viento": 10,
+    "planta": "Tomate",
+    "tiempo_min": 23.43,
+    "frecuencia": 1.85
+  },
+  {
+    "temperatura": 24,
+    "humedad_suelo": 55,
+    "prob_lluvia": 30,
+    "humedad_ambiente": 60,
+    "velocidad_viento": 10,
+    "planta": "Lechuga",
+    "tiempo_min": 23.2,
+    "frecuencia": 1.85
+  },
+  {
+    "temperatura": 24,
+    "humedad_suelo": 55,
+    "prob_lluvia": 30,
+    "humedad_ambiente": 60,
+    "velocidad_viento": 10,
+    "planta": "Zanahoria",
+    "tiempo_min": 22.26,
+    "frecuencia": 1.85
+  },
+  {
+    "temperatura": 24,
+    "humedad_suelo": 55,
+    "prob_lluvia": 30,
+    "humedad_ambiente": 60,
+    "velocidad_viento": 10,
+    "planta": "Cactus",
+    "tiempo_min": 7.5,
+    "frecuencia": 1.85
+  },
+  {
+    "temperatura": 24,
+    "humedad_suelo": 55,
+    "prob_lluvia": 30,
+    "humedad_ambiente": 60,
+    "velocidad_viento": 10,
+    "planta": "Rosa",
+    "tiempo_min": 23.43,
+    "frecuencia": 1.85
+  },
+  {
+    "temperatura": 24,
+    "humedad_suelo": 55,
+    "prob_lluvia": 30,
+    "humedad_ambiente": 60,
+    "velocidad_viento": 10,
+    "planta": "Césped",
+    "tiempo_min": 25.77,
+    "frecuencia": 1.85
+  },
+  {
+    "temperatura": 24,
+    "humedad_suelo": 55,
+    "prob_lluvia": 30,
+    "humedad_ambiente": 60,
+    "velocidad_viento": 10,
+    "planta": "Maíz",
+    "tiempo_min": 24.6,
+    "frecuencia": 1.85
+  },
+  {
+    "temperatura": 24,
+    "humedad_suelo": 55,
+    "prob_lluvia": 30,
+    "humedad_ambiente": 60,
+    "velocidad_viento": 10,
+    "planta": "Fresa",
+    "tiempo_min": 25.77,
+    "frecuencia": 1.85
+  },
+  {
+    "temperatura": 24,
+    "humedad_suelo": 55,
+    "prob_lluvia": 30,
+    "humedad_ambiente": 60,
+    "velocidad_viento": 10,
+    "planta": "Papa",
+    "tiempo_min": 22.26,
+    "frecuencia": 1.85
+  },
+  {
+    "temperatura": 24,
+    "humedad_suelo": 55,
+    "prob_lluvia": 30,
+    "humedad_ambiente": 60,
+    "velocidad_viento": 10,
+    "planta": "Cebolla",
+    "tiempo_min": 19.92,
+    "frecuencia": 1.85
+  },
+  {
+    "temperatura": 24,
+    "humedad_suelo": 55,
+    "prob_lluvia": 30,
+    "humedad_ambiente": 60,
+    "velocidad_viento": 10,
+    "planta": "Apio",
+    "tiempo_min": 28.35,
+    "frecuencia": 1.85
+  },
+  {
+    "temperatura": 24,
+    "humedad_suelo": 55,
+    "prob_lluvia": 30,
+    "humedad_ambiente": 60,
+    "velocidad_viento": 10,
+    "planta": "Manzano",
+    "tiempo_min": 21.09,
+    "frecuencia": 1.85
+  },
+  {
+    "temperature": 28.5,
+    "soil_humidity": 35.2,
+    "rain_probability": 15.8,
+    "air_humidity": 52.1,
+    "wind_speed": 12.3,
+    "planta": "Tomate",
+    "tiempo_min": 30.25,
+    "frecuencia": 2.77
+  },
+  {
+    "temperature": 25.0,
+    "soil_humidity": 50.0,
+    "rain_probability": 20.0,
+    "air_humidity": 60.0,
+    "wind_speed": 10.0,
+    "planta": "Tomate",
+    "tiempo_min": 30.25,
+    "frecuencia": 2.01
+  },
+  {
+    "temperature": 25.0,
+    "soil_humidity": 50.0,
+    "rain_probability": 20.0,
+    "air_humidity": 60.0,
+    "wind_speed": 10.0,
+    "planta": "Lechuga",
+    "tiempo_min": 27.23,
+    "frecuencia": 2.01
+  },
+  {
+    "temperature": 25.0,
+    "soil_humidity": 50.0,
+    "rain_probability": 20.0,
+    "air_humidity": 60.0,
+    "wind_speed": 10.0,
+    "planta": "Zanahoria",
+    "tiempo_min": 28.74,
+    "frecuencia": 2.01
+  },
+  {
+    "temperature": 35.0,
+    "soil_humidity": 15.0,
+    "rain_probability": 5.0,
+    "air_humidity": 25.0,
+    "wind_speed": 20.0,
+    "planta": "Tomate",
+    "tiempo_min": 54.77,
+    "frecuencia": 3.45
+  },
+  {
+    "temperatura": 26,
+    "humedad_suelo": 40,
+    "prob_lluvia": 20,
+    "humedad_ambiente": 50,
+    "velocidad_viento": 12,
+    "planta": "Tomate",
+    "tiempo_min": 30.25,
+    "frecuencia": 2.53
+  },
+  {
+    "temperatura": 24,
+    "humedad_suelo": 55,
+    "prob_lluvia": 30,
+    "humedad_ambiente": 60,
+    "velocidad_viento": 10,
+    "planta": "Tomate",
+    "tiempo_min": 23.43,
+    "frecuencia": 1.85
+  },
+  {
+    "temperatura": 24,
+    "humedad_suelo": 55,
+    "prob_lluvia": 30,
+    "humedad_ambiente": 60,
+    "velocidad_viento": 10,
+    "planta": "Lechuga",
+    "tiempo_min": 23.2,
+    "frecuencia": 1.85
+  },
+  {
+    "temperatura": 24,
+    "humedad_suelo": 55,
+    "prob_lluvia": 30,
+    "humedad_ambiente": 60,
+    "velocidad_viento": 10,
+    "planta": "Zanahoria",
+    "tiempo_min": 22.26,
+    "frecuencia": 1.85
+  },
+  {
+    "temperatura": 24,
+    "humedad_suelo": 55,
+    "prob_lluvia": 30,
+    "humedad_ambiente": 60,
+    "velocidad_viento": 10,
+    "planta": "Cactus",
+    "tiempo_min": 7.5,
+    "frecuencia": 1.85
+  },
+  {
+    "temperatura": 24,
+    "humedad_suelo": 55,
+    "prob_lluvia": 30,
+    "humedad_ambiente": 60,
+    "velocidad_viento": 10,
+    "planta": "Rosa",
+    "tiempo_min": 23.43,
+    "frecuencia": 1.85
+  },
+  {
+    "temperatura": 24,
+    "humedad_suelo": 55,
+    "prob_lluvia": 30,
+    "humedad_ambiente": 60,
+    "velocidad_viento": 10,
+    "planta": "Césped",
+    "tiempo_min": 25.77,
+    "frecuencia": 1.85
+  },
+  {
+    "temperatura": 24,
+    "humedad_suelo": 55,
+    "prob_lluvia": 30,
+    "humedad_ambiente": 60,
+    "velocidad_viento": 10,
+    "planta": "Maíz",
+    "tiempo_min": 24.6,
+    "frecuencia": 1.85
+  },
+  {
+    "temperatura": 24,
+    "humedad_suelo": 55,
+    "prob_lluvia": 30,
+    "humedad_ambiente": 60,
+    "velocidad_viento": 10,
+    "planta": "Fresa",
+    "tiempo_min": 25.77,
+    "frecuencia": 1.85
+  },
+  {
+    "temperatura": 24,
+    "humedad_suelo": 55,
+    "prob_lluvia": 30,
+    "humedad_ambiente": 60,
+    "velocidad_viento": 10,
+    "planta": "Papa",
+    "tiempo_min": 22.26,
+    "frecuencia": 1.85
+  },
+  {
+    "temperatura": 24,
+    "humedad_suelo": 55,
+    "prob_lluvia": 30,
+    "humedad_ambiente": 60,
+    "velocidad_viento": 10,
+    "planta": "Cebolla",
+    "tiempo_min": 19.92,
+    "frecuencia": 1.85
+  },
+  {
+    "temperatura": 24,
+    "humedad_suelo": 55,
+    "prob_lluvia": 30,
+    "humedad_ambiente": 60,
+    "velocidad_viento": 10,
+    "planta": "Apio",
+    "tiempo_min": 28.35,
+    "frecuencia": 1.85
+  },
+  {
+    "temperatura": 24,
+    "humedad_suelo": 55,
+    "prob_lluvia": 30,
+    "humedad_ambiente": 60,
+    "velocidad_viento": 10,
+    "planta": "Manzano",
+    "tiempo_min": 21.09,
+    "frecuencia": 1.85
+  },
+  {
+    "temperatura": 28,
+    "humedad_suelo": 35,
+    "prob_lluvia": 15,
+    "humedad_ambiente": 45,
+    "velocidad_viento": 18,
+    "planta": "Tomate",
+    "tiempo_min": 30.25,
+    "frecuencia": 3.11
+  },
+  {
+    "temperatura": 25,
+    "humedad_suelo": 60,
+    "prob_lluvia": 30,
+    "humedad_ambiente": 50,
+    "velocidad_viento": 10,
+    "planta": "Tomate",
+    "tiempo_min": 22.15,
+    "frecuencia": 1.74
+  },
+  {
+    "temperatura": 18.5,
+    "humedad_suelo": 61.1,
+    "prob_lluvia": 0.0,
+    "humedad_ambiente": 89.0,
+    "velocidad_viento": 20.4,
+    "planta": "Lechuga",
+    "tiempo_min": 9.31,
+    "frecuencia": 1.61
+  },
+  {
+    "temperatura": 18.5,
+    "humedad_aire": 89.0,
+    "prob_lluvia": 0.0,
+    "velocidad_viento": 20.4,
+    "humedad_suelo": 61.1,
+    "planta": "Lechuga",
+    "tiempo_min": 10.35,
+    "frecuencia": 1.65
   }
 ]

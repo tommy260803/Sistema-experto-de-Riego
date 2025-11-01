@@ -41,9 +41,9 @@ class FuzzyIrrigationSystem:
         self.tiempo = ctrl.Consequent(TIME_UNIVERSE, "tiempo")
         self.frecuencia = ctrl.Consequent(FREQ_UNIVERSE, "frecuencia")
 
-        # Funciones de membresía optimizadas (mejor cobertura)
+        # Funciones de membresía optimizadas
         self.temperatura["baja"] = fuzz.trapmf(TEMP_UNIVERSE, [0, 0, 10, 20])
-        self.temperatura["media"] = fuzz.trimf(TEMP_UNIVERSE, [15, 22.5, 30])  # Centrada
+        self.temperatura["media"] = fuzz.trimf(TEMP_UNIVERSE, [15, 22.5, 30]) 
         self.temperatura["alta"] = fuzz.trapmf(TEMP_UNIVERSE, [25, 30, 50, 50])
 
         self.h_suelo["seca"] = fuzz.trapmf(SOIL_UNIVERSE, [0, 0, 15, 30])
@@ -374,6 +374,237 @@ class FuzzyIrrigationSystem:
             explicacion += "\n💡 Alta frecuencia: dividir en sesiones cortas."
 
         return explicacion
+
+    def explain_decision_traceable(
+        self,
+        tiempo: float,
+        frecuencia: float,
+        activaciones: Dict[str, float],
+        inputs: Dict[str, float]
+    ) -> str:
+        """Genera explicación trazable completa con condiciones observadas y reglas aplicadas.
+
+        Args:
+            tiempo: Tiempo de riego calculado (minutos)
+            frecuencia: Frecuencia de riego calculada (riegos/día)
+            activaciones: Diccionario con activación de cada regla
+            inputs: Diccionario con valores de entrada
+
+        Returns:
+            String con explicación completa y trazable
+        """
+        explicacion = "## 🔍 TRAZABILIDAD COMPLETA DE LA DECISIÓN\n\n"
+
+        # 📊 CONDICIONES OBSERVADAS
+        explicacion += "### 📊 Condiciones Observadas por el Sistema:\n"
+        explicacion += f"- 🌡️ **Temperatura**: {inputs.get('temperature', 0):.1f}°C "
+        explicacion += f"({self._interpretar_valor('temperatura', inputs.get('temperature', 0))})\n"
+
+        explicacion += f"- 🌱 **Humedad del Suelo**: {inputs.get('soil_humidity', 0):.1f}% "
+        explicacion += f"({self._interpretar_valor('humedad_suelo', inputs.get('soil_humidity', 0))})\n"
+
+        explicacion += f"- 🌧️ **Probabilidad de Lluvia**: {inputs.get('rain_probability', 0):.1f}% "
+        explicacion += f"({self._interpretar_valor('lluvia', inputs.get('rain_probability', 0))})\n"
+
+        explicacion += f"- 💨 **Humedad del Aire**: {inputs.get('air_humidity', 0):.1f}% "
+        explicacion += f"({self._interpretar_valor('humedad_aire', inputs.get('air_humidity', 0))})\n"
+
+        explicacion += f"- 🍃 **Velocidad del Viento**: {inputs.get('wind_speed', 0):.1f} km/h "
+        explicacion += f"({self._interpretar_valor('viento', inputs.get('wind_speed', 0))})\n\n"
+
+        # 🎯 DECISIÓN FINAL
+        explicacion += "### 🎯 Decisión Final del Sistema:\n"
+        explicacion += f"- ⏱️ **Tiempo de Riego**: {tiempo:.1f} minutos\n"
+        explicacion += f"- 🔄 **Frecuencia de Riego**: {frecuencia:.1f} riegos/día\n"
+        explicacion += f"- 💧 **Consumo Estimado**: {tiempo * frecuencia * 5:.0f} litros/día\n\n"
+
+        # 🧠 REGLAS APLICADAS
+        explicacion += "### 🧠 Reglas Fuzzy Aplicadas:\n"
+        top_rules = sorted(activaciones.items(), key=lambda x: x[1], reverse=True)[:5]
+
+        for regla_id, activacion in top_rules:
+            if activacion > 0.05:  # Solo mostrar reglas con activación significativa
+                descripcion = self._get_rule_description(regla_id)
+                impacto = self._get_rule_impact(regla_id)
+
+                explicacion += f"**{regla_id}** (🔥 Activación: {activacion:.2f})\n"
+                explicacion += f"_{descripcion}_\n"
+                explicacion += f"💡 *Impacto: {impacto}*\n\n"
+
+        # 📈 ANÁLISIS DE SENSIBILIDAD
+        explicacion += "### 📈 Análisis de Sensibilidad:\n"
+        explicacion += self._analizar_sensibilidad(inputs, tiempo, frecuencia)
+
+        # ✅ CONCLUSIONES
+        explicacion += "### ✅ Conclusiones:\n"
+        explicacion += self._generar_conclusiones(inputs, tiempo, frecuencia, activaciones)
+
+        return explicacion
+
+    def _interpretar_valor(self, variable: str, valor: float) -> str:
+        """Interpreta un valor numérico en términos lingüísticos."""
+        if variable == 'temperatura':
+            if valor < 15: return "muy baja ❄️"
+            elif valor < 20: return "baja 🥶"
+            elif valor < 25: return "moderada 😐"
+            elif valor < 30: return "alta 🔥"
+            else: return "muy alta ☀️"
+        elif variable == 'humedad_suelo':
+            if valor < 20: return "muy seca 🌵"
+            elif valor < 35: return "seca 🏜️"
+            elif valor < 50: return "moderada 🌱"
+            elif valor < 70: return "húmeda 💧"
+            else: return "muy húmeda 🌊"
+        elif variable == 'lluvia':
+            if valor < 15: return "muy baja 🌵"
+            elif valor < 30: return "baja 🌧️"
+            elif valor < 50: return "moderada 🌦️"
+            else: return "alta 🌧️"
+        elif variable == 'humedad_aire':
+            if valor < 25: return "muy seca 💨"
+            elif valor < 40: return "seca 🌵"
+            elif valor < 60: return "moderada 💨"
+            else: return "húmeda 💧"
+        elif variable == 'viento':
+            if valor < 5: return "muy bajo 😌"
+            elif valor < 12: return "bajo 🍃"
+            elif valor < 20: return "moderado 🌬️"
+            else: return "alto 💨"
+        return f"valor: {valor}"
+
+    def _get_rule_description(self, rule_id: str) -> str:
+        """Devuelve descripción legible de una regla."""
+        descriptions = {
+            "R1": "Si hay ALTA probabilidad de lluvia → reducir riego significativamente",
+            "R2": "Si suelo está HÚMEDO y hay ALTA probabilidad de lluvia → riego mínimo",
+            "R3": "Si suelo está SECO y hay BAJA probabilidad de lluvia → riego intensivo",
+            "R4": "Si temperatura es ALTA y suelo está SECO → aumentar tiempo de riego",
+            "R5": "Si humedad del aire es BAJA y suelo está SECO → riego intensivo",
+            "R6": "Si suelo está SECO y viento es ALTO → aumentar tiempo de riego",
+            "R7": "Si suelo SECO + temperatura ALTA + lluvia BAJA + viento ALTO → riego máximo",
+            "R8": "Si suelo está HÚMEDO → reducir tiempo de riego",
+            "R9": "Si temperatura es BAJA y humedad del aire es ALTA → riego corto",
+            "R10": "Si suelo MODERADO y lluvia MEDIA → riego corto",
+            "R11": "Si humedad del aire ALTA y lluvia MEDIA → riego corto",
+            "R12": "Si temperatura BAJA y lluvia ALTA → riego nulo",
+            "R13": "Si viento ALTO y temperatura ALTA → aumentar frecuencia",
+            "R14": "Si viento ALTO y lluvia BAJA → aumentar frecuencia",
+            "R15": "Si temperatura ALTA y viento MEDIO → aumentar frecuencia",
+            "R16": "Si humedad del aire BAJA y viento ALTO → aumentar frecuencia",
+            "R17": "Si temperatura MEDIA y suelo MODERADO → tiempo medio",
+            "R18": "Si temperatura ALTA + humedad aire BAJA + viento BAJO → tiempo largo",
+            "R19": "Si suelo MODERADO y viento BAJO → frecuencia media",
+            "R20": "Si humedad del aire MEDIA y lluvia BAJA → tiempo medio",
+            "R21": "Si temperatura MEDIA y lluvia BAJA → frecuencia media",
+            "R22": "Si viento BAJO y lluvia BAJA → frecuencia media",
+            "R23": "Si temperatura MEDIA + humedad aire MEDIA + lluvia MEDIA → tiempo y frecuencia medios",
+            "R24": "Si temperatura BAJA y suelo MODERADO → tiempo corto",
+            "R25": "Si lluvia MEDIA y viento MEDIO → frecuencia media",
+            "R26": "Si temperatura ALTA + lluvia MEDIA + viento ALTO → tiempo medio",
+            "R27": "Si temperatura MEDIA + humedad aire BAJA + suelo SECO → tiempo largo",
+            "R28": "Si temperatura ALTA y humedad del aire ALTA → frecuencia media",
+            "R29": "Si suelo SECO + humedad aire BAJA + lluvia MEDIA → tiempo medio",
+            "R30": "Si suelo MODERADO + humedad aire ALTA + lluvia BAJA → tiempo medio",
+            "R31": "Si suelo HÚMEDO y temperatura ALTA → frecuencia media",
+            "R32": "Si viento ALTO y humedad del aire BAJA → tiempo medio",
+            "R33": "Si viento BAJO y humedad del aire ALTA → frecuencia baja"
+        }
+        return descriptions.get(rule_id, f"Regla {rule_id}: definición no disponible")
+
+    def _get_rule_impact(self, rule_id: str) -> str:
+        """Devuelve el impacto esperado de una regla."""
+        impacts = {
+            "R1": "Reduce significativamente el tiempo de riego",
+            "R2": "Minimiza el riego por condiciones húmedas",
+            "R3": "Aumenta considerablemente el riego por sequía",
+            "R4": "Incrementa tiempo por estrés térmico",
+            "R5": "Aumenta riego por baja humedad atmosférica",
+            "R6": "Incrementa tiempo por evaporación del viento",
+            "R7": "Máximo riego por condiciones extremas",
+            "R8": "Reduce tiempo por suelo húmedo",
+            "R9": "Riego moderado por condiciones frías",
+            "R10": "Riego equilibrado por humedad moderada",
+            "R11": "Riego corto por alta humedad ambiental",
+            "R12": "Riego nulo por condiciones favorables",
+            "R13": "Aumenta frecuencia por viento y calor",
+            "R14": "Incrementa frecuencia por viento seco",
+            "R15": "Aumenta frecuencia por calor moderado",
+            "R16": "Incrementa frecuencia por sequía atmosférica",
+            "R17": "Riego equilibrado por condiciones medias",
+            "R18": "Riego prolongado por calor seco",
+            "R19": "Frecuencia moderada por estabilidad",
+            "R20": "Riego medio por humedad atmosférica",
+            "R21": "Frecuencia media por temperatura moderada",
+            "R22": "Frecuencia media por condiciones estables",
+            "R23": "Riego perfectamente equilibrado",
+            "R24": "Riego corto por condiciones frías",
+            "R25": "Frecuencia media por lluvia moderada",
+            "R26": "Riego medio por calor con lluvia",
+            "R27": "Riego largo por sequía moderada",
+            "R28": "Frecuencia media por calor húmedo",
+            "R29": "Riego medio por suelo seco con lluvia",
+            "R30": "Riego medio por suelo moderado",
+            "R31": "Frecuencia media por suelo húmedo y calor",
+            "R32": "Riego medio por viento seco",
+            "R33": "Frecuencia baja por condiciones estables"
+        }
+        return impacts.get(rule_id, "Impacto moderado en la decisión")
+
+    def _analizar_sensibilidad(self, inputs: Dict[str, float], tiempo: float, frecuencia: float) -> str:
+        """Analiza qué variables más afectan la decisión."""
+        analisis = ""
+
+        # Variables críticas para tiempo
+        if inputs.get('soil_humidity', 50) < 30:
+            analisis += "🚨 **Variable Crítica**: Humedad del suelo muy baja (+50% impacto en tiempo)\n"
+        if inputs.get('temperature', 25) > 35:
+            analisis += "🔥 **Variable Crítica**: Temperatura muy alta (+30% impacto en tiempo)\n"
+        if inputs.get('rain_probability', 20) > 70:
+            analisis += "🌧️ **Variable Crítica**: Alta probabilidad de lluvia (-40% impacto en tiempo)\n"
+
+        # Variables críticas para frecuencia
+        if inputs.get('wind_speed', 10) > 20:
+            analisis += "💨 **Variable Crítica**: Viento alto (+25% impacto en frecuencia)\n"
+
+        if not analisis:
+            analisis = "✅ **Condiciones Estables**: Ninguna variable tiene impacto crítico extremo\n"
+
+        analisis += "\n💡 *Las variables críticas son aquellas que más influyen en la decisión final*"
+
+        return analisis
+
+    def _generar_conclusiones(self, inputs: Dict[str, float], tiempo: float, frecuencia: float, activaciones: Dict[str, float]) -> str:
+        """Genera conclusiones finales sobre la decisión."""
+        conclusiones = ""
+
+        # Estado general
+        if tiempo > 40:
+            conclusiones += "🔴 **Estado**: CONDICIONES CRÍTICAS - Se requiere riego urgente\n"
+        elif tiempo > 25:
+            conclusiones += "🟡 **Estado**: CONDICIONES DE ALERTA - Monitorear frecuentemente\n"
+        elif tiempo < 10:
+            conclusiones += "🟢 **Estado**: CONDICIONES ÓPTIMAS - Riego mínimo necesario\n"
+        else:
+            conclusiones += "✅ **Estado**: CONDICIONES EQUILIBRADAS - Riego normal\n"
+
+        # Eficiencia estimada
+        eficiencia = "alta"
+        if tiempo > 35 or frecuencia > 3:
+            eficiencia = "baja (revisar condiciones)"
+        elif tiempo < 15 and frecuencia < 2:
+            eficiencia = "muy alta"
+
+        conclusiones += f"📊 **Eficiencia del Sistema**: {eficiencia}\n"
+
+        # Recomendación de acción
+        if tiempo > 30:
+            conclusiones += "🚀 **Acción Recomendada**: Implementar riego inmediatamente\n"
+        elif tiempo > 20:
+            conclusiones += "👀 **Acción Recomendada**: Preparar sistema de riego\n"
+        else:
+            conclusiones += "✅ **Acción Recomendada**: Continuar monitoreo normal\n"
+
+        return conclusiones
 
 # Compatibilidad: alias para mantener imports existentes funcionando
 SistemaRiegoDifuso = FuzzyIrrigationSystem

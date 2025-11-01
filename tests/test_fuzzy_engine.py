@@ -1,5 +1,5 @@
 import pytest
-from src.fuzzy_engine import FuzzyIrrigationSystem
+from nucleo.motor_difuso import FuzzyIrrigationSystem
 
 
 def test_calcular_riego_seco():

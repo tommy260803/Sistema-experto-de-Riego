@@ -355,7 +355,26 @@ class VisualizadorSuperficies:
         st.plotly_chart(fig, use_container_width=True)
 
     def _get_default_value(self, param_name: str) -> float:
-        """Valor por defecto según parámetro"""
+        """Valor por defecto según parámetro, usando valores de calculadora si disponibles"""
+        # Primero intentar obtener valores de la calculadora
+        calc_current = st.session_state.get('calculadora_current', {})
+
+        # Mapear nombres de parámetros
+        param_mapping = {
+            'temperature': 'temperature',
+            'soil_humidity': 'soil_humidity',
+            'rain_probability': 'rain_probability',
+            'air_humidity': 'air_humidity',
+            'wind_speed': 'wind_speed'
+        }
+
+        mapped_param = param_mapping.get(param_name, param_name)
+
+        # Si hay valor de calculadora, usarlo
+        if mapped_param in calc_current:
+            return float(calc_current[mapped_param])
+
+        # Valores por defecto estándar
         defaults = {
             'temperature': 25.0,
             'soil_humidity': 50.0,

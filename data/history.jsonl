@@ -71,3 +71,6 @@
 {"ts": 1761874657, "temperatura": 16.5, "humedad_suelo": 62.9, "prob_lluvia": 0.0, "humedad_ambiental": 94.0, "viento": 11.8, "planta": "Fresa", "tiempo_min": 11.5, "frecuencia": 1.62, "confianza": 0.59}
 {"ts": 1761881264, "temperatura": 16.4, "humedad_suelo": 62.9, "prob_lluvia": 0.0, "humedad_ambiental": 94.0, "viento": 8.1, "planta": "Tomate", "tiempo_min": 11.5, "frecuencia": 1.66, "confianza": 0.84}
 {"ts": 1761953226, "temperatura": 37.87, "humedad_suelo": 74.74, "prob_lluvia": 69.57, "humedad_ambiental": 62.04, "viento": 28.75, "planta": "Papa", "tiempo_min": 8.8, "frecuencia": 2.15, "confianza": 0.87}
+{"ts": 1762000673, "temperatura": 25.0, "humedad_suelo": 60.0, "prob_lluvia": 30.0, "humedad_ambiental": 50.0, "viento": 10.0, "planta": "Tomate", "tiempo_min": 22.15, "frecuencia": 1.74, "confianza": 0.51}
+{"ts": 1762030917, "temperatura": 25.0, "humedad_suelo": 60.0, "prob_lluvia": 30.0, "humedad_ambiental": 50.0, "viento": 10.0, "planta": "Tomate", "tiempo_min": 22.15, "frecuencia": 1.74, "confianza": 0.51}
+{"ts": 1762039135, "temperatura": 18.5, "humedad_suelo": 61.1, "prob_lluvia": 0.0, "humedad_ambiental": 89.0, "viento": 20.4, "planta": "Lechuga", "tiempo_min": 10.35, "frecuencia": 1.61, "confianza": 0.44}

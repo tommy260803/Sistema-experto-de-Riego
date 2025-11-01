@@ -309,6 +309,19 @@ def render_dashboard() -> None:
             f"Tiempo ajustado para {planta}: {reco['tiempo_ajustado']:.1f} min | Frecuencia: {reco['frecuencia']:.2f} x/día"
         )
 
+        # 🔍 TRAZABILIDAD COMPLETA
+        show_traceability_explanation(
+            inputs={
+                'temperature': temperatura,
+                'soil_humidity': humedad_suelo,
+                'rain_probability': prob_lluvia,
+                'air_humidity': humedad_ambiental,
+                'wind_speed': viento
+            },
+            outputs={'tiempo': t, 'frecuencia': f},
+            activaciones=act
+        )
+
         # Reglas más activas con visualización mejorada
         with st.expander("🔍 Ver Reglas Fuzzy Activadas (Top 10)"):
             sorted_rules = sorted(act.items(), key=lambda kv: kv[1], reverse=True)[:10]
@@ -351,3 +364,150 @@ def render_dashboard() -> None:
                 st.success("💾 Cache limpiado exitosamente")
             else:
                 st.info("No hay cache para limpiar")
+
+
+def show_traceability_explanation(inputs: dict, outputs: dict, activaciones: dict) -> None:
+    """Componente visual de trazabilidad completa de la decisión del sistema.
+
+    Args:
+        inputs: Diccionario con valores de entrada (temperature, soil_humidity, etc.)
+        outputs: Diccionario con valores de salida (tiempo, frecuencia)
+        activaciones: Diccionario con activación de reglas fuzzy
+    """
+    with st.expander("🔍 TRAZABILIDAD COMPLETA - ¿Por qué decidió así?", expanded=False):
+
+        # Generar explicación trazable completa
+        explicacion_completa = _engine.explain_decision_traceable(
+            tiempo=outputs['tiempo'],
+            frecuencia=outputs['frecuencia'],
+            activaciones=activaciones,
+            inputs=inputs
+        )
+
+        # Mostrar explicación en formato Markdown
+        st.markdown(explicacion_completa)
+
+        # Visualización adicional: Diagrama de reglas activas
+        st.markdown("---")
+        st.markdown("### 📊 Visualización de Reglas Activas")
+
+        # Preparar datos para el gráfico
+        top_rules = sorted(activaciones.items(), key=lambda x: x[1], reverse=True)[:8]
+
+        if top_rules:
+            # Crear gráfico de barras horizontales
+            fig = go.Figure()
+
+            # Barras principales
+            fig.add_trace(go.Bar(
+                y=[f"{regla} ({act:.2f})" for regla, act in top_rules],
+                x=[act for regla, act in top_rules],
+                orientation='h',
+                marker=dict(
+                    color=[act for regla, act in top_rules],
+                    colorscale=[
+                        [0.0, '#e3f2fd'],  # Azul muy claro
+                        [0.3, '#2196f3'],  # Azul
+                        [0.7, '#ff9800'],  # Naranja
+                        [1.0, '#f44336']   # Rojo
+                    ],
+                    showscale=True,
+                    colorbar=dict(
+                        title="Activación",
+                        titleside="right",
+                        tickformat=".2f"
+                    )
+                ),
+                text=[f"{act:.3f}" for regla, act in top_rules],
+                textposition='outside',
+                hovertemplate="<b>%{y}</b><br>Activación: %{x:.3f}<extra></extra>"
+            ))
+
+            # Configurar layout
+            fig.update_layout(
+                title="Top 8 Reglas Más Activas",
+                xaxis=dict(
+                    title="Nivel de Activación (0-1)",
+                    range=[0, 1.1],
+                    tickformat=".2f"
+                ),
+                yaxis=dict(
+                    title="Regla Fuzzy",
+                    autorange="reversed"  # Para que la más activa aparezca arriba
+                ),
+                height=max(400, len(top_rules) * 40),
+                margin=dict(l=200, r=100, t=50, b=50),
+                template="plotly_white"
+            )
+
+            st.plotly_chart(fig, use_container_width=True)
+
+            # Información adicional
+            st.markdown("---")
+            col1, col2, col3 = st.columns(3)
+
+            with col1:
+                max_activacion = max(activaciones.values())
+                regla_max = max(activaciones.items(), key=lambda x: x[1])[0]
+                st.metric(
+                    "🔥 Regla Más Activa",
+                    regla_max,
+                    f"{max_activacion:.3f}"
+                )
+
+            with col2:
+                reglas_activas = sum(1 for act in activaciones.values() if act > 0.1)
+                st.metric(
+                    "📋 Reglas Activas",
+                    f"{reglas_activas}/33",
+                    f"{reglas_activas/33*100:.0f}%"
+                )
+
+            with col3:
+                # Calcular diversidad de activación
+                valores = list(activaciones.values())
+                diversidad = len([v for v in valores if v > 0.2]) / len(valores)
+                st.metric(
+                    "🎭 Diversidad",
+                    f"{diversidad:.1f}",
+                    help="Proporción de reglas con activación significativa"
+                )
+
+        # Consejos de interpretación
+        st.markdown("---")
+        st.markdown("### 💡 Cómo Interpretar Esta Trazabilidad")
+
+        col1, col2 = st.columns(2)
+
+        with col1:
+            st.markdown("""
+            **🎯 Activación Alta (0.7-1.0):**
+            - Regla muy influyente en la decisión
+            - Condición se cumple fuertemente
+            - Confianza alta en esta regla
+
+            **📊 Activación Media (0.3-0.7):**
+            - Regla moderadamente activa
+            - Contribuye parcialmente a la decisión
+            - Considerar junto con otras reglas
+            """)
+
+        with col2:
+            st.markdown("""
+            **📋 Activación Baja (0.0-0.3):**
+            - Regla poco relevante
+            - Condición no se cumple
+            - Mínimo impacto en decisión final
+
+            **🔍 Variables Críticas:**
+            - Aquellas marcadas con 🚨 o 🔥
+            - Tienen mayor impacto en el resultado
+            - Monitorear especialmente
+            """)
+
+        # Nota final
+        st.info("""
+        **💡 Recordatorio:** Esta trazabilidad muestra exactamente cómo el sistema de lógica difusa 
+        procesa tus condiciones ambientales para tomar decisiones de riego. Cada regla representa 
+        conocimiento experto agrícola traducido a lógica matemática.
+        """)

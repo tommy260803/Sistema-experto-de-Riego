@@ -175,3 +175,9 @@
 2025-10-31 18:27:06,166 - INFO - Irrigation calculation initiated for plant Papa with inputs: temp=37.87, soil_humidity=74.74, rain_prob=69.57, air_humidity=62.04, wind=28.75
 2025-10-31 18:27:06,182 - INFO - Irrigation decision for Papa: time=8.80 min, frequency=2.15 x/day
 2025-10-31 18:27:06,193 - INFO - Saving history record for plant Papa: time=8.8, frequency=2.15
+2025-11-01 07:37:53,102 - INFO - Irrigation calculation initiated for plant Tomate with inputs: temp=25.0, soil_humidity=60.0, rain_prob=30.0, air_humidity=50.0, wind=10.0
+2025-11-01 07:37:53,122 - INFO - Irrigation decision for Tomate: time=22.15 min, frequency=1.74 x/day
+2025-11-01 07:37:53,240 - INFO - Saving history record for plant Tomate: time=22.15, frequency=1.74
+2025-11-01 16:01:57,789 - INFO - Irrigation calculation initiated for plant Tomate with inputs: temp=25.0, soil_humidity=60.0, rain_prob=30.0, air_humidity=50.0, wind=10.0
+2025-11-01 16:01:57,808 - INFO - Irrigation decision for Tomate: time=22.15 min, frequency=1.74 x/day
+2025-11-01 16:01:57,816 - INFO - Saving history record for plant Tomate: time=22.15, frequency=1.74

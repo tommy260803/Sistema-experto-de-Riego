@@ -55,13 +55,16 @@ class VisualizadorPertenencia:
     def _plot_interactive(self) -> None:
         """Modo interactivo con simulación en vivo"""
 
+        # Obtener valores actuales de la calculadora si existen
+        calc_current = st.session_state.get('calculadora_current', {})
+
         variables_info = {
             "Temperatura (°C)": {
                 "universe": TEMP_UNIVERSE,
                 "var": self.system.temperatura,
                 "labels": ["baja", "media", "alta"],
                 "range": (0, 50),
-                "default": 25,
+                "default": calc_current.get('temperature', 25.0),
                 "icon": "🌡️",
                 "description": "Temperatura ambiente que afecta la evapotranspiración"
             },
@@ -70,7 +73,7 @@ class VisualizadorPertenencia:
                 "var": self.system.h_suelo,
                 "labels": ["seca", "moderada", "humeda"],
                 "range": (0, 100),
-                "default": 50,
+                "default": calc_current.get('soil_humidity', 50.0),
                 "icon": "🌱",
                 "description": "Nivel de humedad en el suelo medido por sensores"
             },
@@ -79,7 +82,7 @@ class VisualizadorPertenencia:
                 "var": self.system.lluvia,
                 "labels": ["baja", "media", "alta"],
                 "range": (0, 100),
-                "default": 20,
+                "default": calc_current.get('rain_probability', 20.0),
                 "icon": "🌧️",
                 "description": "Probabilidad de precipitación en las próximas horas"
             },
@@ -88,7 +91,7 @@ class VisualizadorPertenencia:
                 "var": self.system.h_aire,
                 "labels": ["baja", "media", "alta"],
                 "range": (0, 100),
-                "default": 60,
+                "default": calc_current.get('air_humidity', 60.0),
                 "icon": "💨",
                 "description": "Humedad relativa del aire ambiente"
             },
@@ -97,7 +100,7 @@ class VisualizadorPertenencia:
                 "var": self.system.viento,
                 "labels": ["bajo", "medio", "alto"],
                 "range": (0, 50),
-                "default": 15,
+                "default": calc_current.get('wind_speed', 15.0),
                 "icon": "🍃",
                 "description": "Velocidad del viento que afecta la evapotranspiración"
             },
@@ -232,12 +235,17 @@ class VisualizadorPertenencia:
                         elif value >= 0.4:
                             bg_color, text_color, status = '#FFF3CD', '#856404', "~ Medio"
                         else:
-                            bg_color, text_color, status = '#F8D7DA', '#721C24', "⬇️ Bajo"
+                            bg_color, text_color, status = '#F8D7DA', "#1D1D1D", "⬇️ Bajo"
 
                         st.markdown(f"""
-                        <div style="background-color: {bg_color}; padding: 10px; border-radius: 5px; border-left: 4px solid {text_color};">
+                        <style>
+                        .custom-box span {{
+                            color: black !important;
+                        }}
+                        </style>
+                        <div class="custom-box" style="background-color: {bg_color}; padding: 10px; border-radius: 5px; border-left: 4px solid {text_color};">
                             <strong style="color: {text_color};">{label.capitalize()}</strong><br>
-                            <span style="font-size: 18px; font-weight: bold; color: black !important;">{value:.3f}</span><br>
+                            <span style="color: black !important; font-weight: bold; font-size: 18px;">{value:.3f}</span><br>
                             <small style="color: {text_color};">{status}</small>
                         </div>
                         """, unsafe_allow_html=True)
@@ -256,17 +264,78 @@ class VisualizadorPertenencia:
             ("Humedad Suelo (%)", SOIL_UNIVERSE, self.system.h_suelo, ["seca", "moderada", "humeda"], "🌱"),
             ("Prob. Lluvia (%)", RAIN_UNIVERSE, self.system.lluvia, ["baja", "media", "alta"], "🌧️"),
             ("Humedad Aire (%)", AIRH_UNIVERSE, self.system.h_aire, ["baja", "media", "alta"], "💨"),
+            ("Velocidad Viento (km/h)", WIND_UNIVERSE, self.system.viento, ["bajo", "medio", "alto"], "🍃"),
         ]
 
         safe_colors = ['#FF6B6B', '#FFD93D', '#6BCF7F']
 
-        for i in range(0, len(variables), 2):
+        # Primera fila: 3 columnas
+        cols = st.columns(3)
+        for j in range(3):
+            if j >= len(variables):
+                break
+
+            title, universe, var, labels, icon = variables[j]
+
+            try:
+                with cols[j]:
+                    fig = go.Figure()
+
+                    for k, label in enumerate(labels):
+                        color = safe_colors[k % len(safe_colors)]
+                        fig.add_trace(go.Scatter(
+                            x=universe,
+                            y=var[label].mf,
+                            name=label.capitalize(),
+                            mode='lines',
+                            line=dict(width=3, color=color),
+                            hovertemplate=f'{label}: %{{y:.2f}}<extra></extra>'
+                        ))
+
+                    fig.update_layout(
+                        title=dict(text=f"{icon} {title}", font=dict(color='black', size=10, family='Arial')),
+                        xaxis_title="Valor",
+                        yaxis_title="μ",
+                        template='plotly_white',
+                        height=250,
+                        showlegend=True,
+                        plot_bgcolor='white',
+                        paper_bgcolor='white',
+                        legend=dict(
+                            orientation="h",
+                            yanchor="bottom",
+                            y=-0.3,
+                            xanchor="center",
+                            x=0.5,
+                            font=dict(color='black', size=8)
+                        ),
+                        margin=dict(l=30, r=30, t=50, b=50),
+                        font=dict(size=9, family='Arial', color='black'),
+                        xaxis=dict(
+                            title_font=dict(color='black'),
+                            tickfont=dict(color='black')
+                        ),
+                        yaxis=dict(
+                            title_font=dict(color='black'),
+                            tickfont=dict(color='black')
+                        )
+                    )
+
+                    st.plotly_chart(fig, use_container_width=True)
+
+            except Exception as e:
+                with cols[j]:
+                    st.error(f"Error en {title}: {str(e)[:50]}...")
+
+        # Segunda fila: 2 columnas (variables restantes)
+        if len(variables) > 3:
             cols = st.columns(2)
             for j in range(2):
-                if i + j >= len(variables):
+                idx = j + 3
+                if idx >= len(variables):
                     break
 
-                title, universe, var, labels, icon = variables[i + j]
+                title, universe, var, labels, icon = variables[idx]
 
                 try:
                     with cols[j]:
@@ -284,24 +353,24 @@ class VisualizadorPertenencia:
                             ))
 
                         fig.update_layout(
-                            title=dict(text=f"{icon} {title}", font=dict(color='black', size=12, family='Arial')),
+                            title=dict(text=f"{icon} {title}", font=dict(color='black', size=10, family='Arial')),
                             xaxis_title="Valor",
                             yaxis_title="μ",
                             template='plotly_white',
-                            height=300,
+                            height=250,
                             showlegend=True,
                             plot_bgcolor='white',
                             paper_bgcolor='white',
                             legend=dict(
                                 orientation="h",
                                 yanchor="bottom",
-                                y=-0.2,
+                                y=-0.3,
                                 xanchor="center",
                                 x=0.5,
-                                font=dict(color='black')
+                                font=dict(color='black', size=8)
                             ),
-                            margin=dict(l=40, r=40, t=60, b=60),
-                            font=dict(size=10, family='Arial', color='black'),
+                            margin=dict(l=30, r=30, t=50, b=50),
+                            font=dict(size=9, family='Arial', color='black'),
                             xaxis=dict(
                                 title_font=dict(color='black'),
                                 tickfont=dict(color='black')
