@@ -718,5 +718,15 @@
     "planta": "Tomate",
     "tiempo_min": 11.5,
     "frecuencia": 1.66
+  },
+  {
+    "temperatura": 37.87,
+    "humedad_suelo": 74.74,
+    "prob_lluvia": 69.57,
+    "humedad_ambiente": 62.04,
+    "velocidad_viento": 28.75,
+    "planta": "Papa",
+    "tiempo_min": 8.36,
+    "frecuencia": 2.15
   }
 ]
